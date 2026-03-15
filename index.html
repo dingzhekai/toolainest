@@ -150,6 +150,23 @@ color:#6e6e73;
 
 <div class="section">
 
+<div style="text-align:center;margin-bottom:30px;">
+
+<input 
+id="search"
+placeholder="Search AI tools..."
+style="
+padding:12px 20px;
+width:300px;
+border-radius:25px;
+border:1px solid #ddd;
+font-size:16px;
+"
+oninput="searchTools()"
+/>
+
+</div>
+
 <div class="filters">
 
 <button onclick="filterTools('All')">All</button>
@@ -231,7 +248,23 @@ let filtered=allTools.filter(t=>t.category===category)
 displayTools(filtered)
 
 }
+function searchTools(){
 
+let keyword=document.getElementById("search").value.toLowerCase()
+
+let filtered=allTools.filter(tool=>
+
+tool.name.toLowerCase().includes(keyword) ||
+
+tool.description.toLowerCase().includes(keyword) ||
+
+tool.category.toLowerCase().includes(keyword)
+
+)
+
+displayTools(filtered)
+
+}
 }
 
 </script>
