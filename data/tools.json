@@ -1,7 +1,7 @@
 [
 {
 "name":"ChatGPT",
-"category":"AI Chat",
+"category":"Chat",
 "description":"Advanced AI chatbot for writing, coding and productivity.",
 "url":"https://chat.openai.com",
 "logo":"https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
@@ -9,65 +9,41 @@
 
 {
 "name":"Claude",
-"category":"AI Chat",
-"description":"AI assistant designed for reasoning and long documents.",
+"category":"Chat",
+"description":"AI assistant for reasoning and writing.",
 "url":"https://claude.ai",
 "logo":"https://logo.clearbit.com/anthropic.com"
 },
 
 {
-"name":"Gemini",
-"category":"AI Chat",
-"description":"Google AI assistant for productivity and research.",
-"url":"https://gemini.google.com",
-"logo":"https://upload.wikimedia.org/wikipedia/commons/8/8f/Google-gemini-icon.svg"
-},
-
-{
 "name":"Midjourney",
-"category":"AI Image",
-"description":"Popular AI image generation tool for creating artwork.",
+"category":"Image",
+"description":"AI image generation tool.",
 "url":"https://midjourney.com",
 "logo":"https://upload.wikimedia.org/wikipedia/commons/e/e6/Midjourney_Emblem.png"
 },
 
 {
 "name":"DALL-E",
-"category":"AI Image",
-"description":"AI model that creates images from text prompts.",
+"category":"Image",
+"description":"AI image generator by OpenAI.",
 "url":"https://openai.com/dall-e",
 "logo":"https://logo.clearbit.com/openai.com"
 },
 
 {
-"name":"Leonardo AI",
-"category":"AI Image",
-"description":"AI platform for generating game assets and artwork.",
-"url":"https://leonardo.ai",
-"logo":"https://logo.clearbit.com/leonardo.ai"
+"name":"Runway",
+"category":"Video",
+"description":"AI video generation platform.",
+"url":"https://runwayml.com",
+"logo":"https://logo.clearbit.com/runwayml.com"
 },
 
 {
 "name":"Jasper",
-"category":"AI Writing",
-"description":"AI marketing copywriting and content generation tool.",
+"category":"Writing",
+"description":"AI writing and marketing assistant.",
 "url":"https://jasper.ai",
 "logo":"https://logo.clearbit.com/jasper.ai"
-},
-
-{
-"name":"Copy.ai",
-"category":"AI Writing",
-"description":"Generate marketing copy and content using AI.",
-"url":"https://copy.ai",
-"logo":"https://logo.clearbit.com/copy.ai"
-},
-
-{
-"name":"Writesonic",
-"category":"AI Writing",
-"description":"AI writing assistant for blog posts and marketing.",
-"url":"https://writesonic.com",
-"logo":"https://logo.clearbit.com/writesonic.com"
 }
 ]
