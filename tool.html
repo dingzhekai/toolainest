@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>AI Tool</title>
+
+<style>
+
+body{
+font-family:-apple-system,BlinkMacSystemFont;
+background:#f5f5f7;
+padding:40px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 20px rgba(0,0,0,0.05);
+}
+
+img{
+width:60px;
+}
+
+a{
+color:#0071e3;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container" id="tool">
+
+Loading...
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search)
+
+const name = params.get("name")
+
+fetch("data/tools.json")
+
+.then(res=>res.json())
+
+.then(tools=>{
+
+let tool = tools.find(t => t.name === name)
+
+document.getElementById("tool").innerHTML = `
+
+<img src="${tool.logo}">
+
+<h1>${tool.name}</h1>
+
+<p>${tool.description}</p>
+
+<br>
+
+<a href="${tool.url}" target="_blank">
+
+Visit Official Website →
+
+</a>
+
+`
+
+})
+
+</script>
+
+</body>
+
+</html>
