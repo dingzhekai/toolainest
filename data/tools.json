@@ -12,7 +12,7 @@
 "category":"AI Chat",
 "description":"AI assistant designed for reasoning and long documents.",
 "url":"https://claude.ai",
-"logo":"https://upload.wikimedia.org/wikipedia/commons/8/8a/Anthropic_logo.svg"
+"logo":"https://logo.clearbit.com/anthropic.com"
 },
 
 {
@@ -36,7 +36,7 @@
 "category":"AI Image",
 "description":"AI model that creates images from text prompts.",
 "url":"https://openai.com/dall-e",
-"logo":"https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+"logo":"https://logo.clearbit.com/openai.com"
 },
 
 {
@@ -44,7 +44,7 @@
 "category":"AI Image",
 "description":"AI platform for generating game assets and artwork.",
 "url":"https://leonardo.ai",
-"logo":"https://assets-global.website-files.com/64a6f67b79a5a9d3b0f8b98c/64a6f7d74e2c8b4a8d76e8c1_leonardo-logo.png"
+"logo":"https://logo.clearbit.com/leonardo.ai"
 },
 
 {
@@ -52,15 +52,15 @@
 "category":"AI Writing",
 "description":"AI marketing copywriting and content generation tool.",
 "url":"https://jasper.ai",
-"logo":"https://assets-global.website-files.com/60f5f8e4d6c1b9f5c0e54796/60f5f93b52f4fb1517972ed1_jasper-logo.svg"
+"logo":"https://logo.clearbit.com/jasper.ai"
 },
 
 {
 "name":"Copy.ai",
 "category":"AI Writing",
 "description":"Generate marketing copy and content using AI.",
-"url":"https://assets-global.website-files.com/628288c5cd3e8411b1e89eac/6282892df3e1b9fc5f3867dd_copy-ai-logo.svg",
-"url":"https://copy.ai"
+"url":"https://copy.ai",
+"logo":"https://logo.clearbit.com/copy.ai"
 },
 
 {
@@ -68,6 +68,6 @@
 "category":"AI Writing",
 "description":"AI writing assistant for blog posts and marketing.",
 "url":"https://writesonic.com",
-"logo":"https://uploads-ssl.webflow.com/60f7b7e66f0e9b1d4b7d16c1/60f7b7e66f0e9b7f7f7d16c3_writesonic-logo.svg"
+"logo":"https://logo.clearbit.com/writesonic.com"
 }
 ]
