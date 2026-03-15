@@ -40,11 +40,34 @@ padding:80px 20px;
 
 .hero h1{
 font-size:48px;
+margin-bottom:10px;
 }
 
 .hero p{
 color:#6e6e73;
 font-size:20px;
+}
+
+/* FILTERS */
+
+.filters{
+text-align:center;
+margin-bottom:40px;
+}
+
+.filters button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+margin:5px;
+background:#e8e8ed;
+cursor:pointer;
+font-size:14px;
+}
+
+.filters button:hover{
+background:#0071e3;
+color:white;
 }
 
 /* SECTION */
@@ -68,7 +91,7 @@ gap:20px;
 .card{
 background:white;
 padding:25px;
-border-radius:16px;
+border-radius:18px;
 box-shadow:0 10px 20px rgba(0,0,0,0.05);
 transition:0.3s;
 }
@@ -82,13 +105,22 @@ width:40px;
 margin-bottom:10px;
 }
 
+.card h3{
+margin:5px 0;
+}
+
 .card p{
 color:#6e6e73;
+font-size:14px;
 }
 
 .card a{
+display:inline-block;
+margin-top:8px;
+margin-right:10px;
 color:#0071e3;
 text-decoration:none;
+font-weight:500;
 }
 
 /* FOOTER */
@@ -123,11 +155,17 @@ AI Tools
 
 <div class="section">
 
-<h2>AI Tools</h2>
+<div class="filters">
 
-<div class="grid" id="tools">
+<button onclick="filterTools('All')">All</button>
+<button onclick="filterTools('Chat')">Chat</button>
+<button onclick="filterTools('Image')">Image</button>
+<button onclick="filterTools('Video')">Video</button>
+<button onclick="filterTools('Writing')">Writing</button>
 
 </div>
+
+<div class="grid" id="tools"></div>
 
 </div>
 
@@ -139,13 +177,25 @@ AI Tools
 
 <script>
 
+let allTools = []
+
 fetch("data/tools.json")
 
-.then(response => response.json())
+.then(res => res.json())
 
 .then(tools => {
 
+allTools = tools
+
+displayTools(tools)
+
+})
+
+function displayTools(tools){
+
 let container = document.getElementById("tools")
+
+container.innerHTML=""
 
 tools.forEach(tool => {
 
@@ -153,8 +203,7 @@ let card = `
 
 <div class="card">
 
-<img src="${tool.logo}" width="40"
-onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'">
+<img src="${tool.logo}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'">
 
 <h3>${tool.name}</h3>
 
@@ -162,9 +211,7 @@ onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_
 
 <a href="${tool.url}" target="_blank">Visit →</a>
 
-<a href="tool.html?name=${tool.name}" target="_blank">
-Details →
-</a>
+<a href="tool.html?name=${tool.name}" target="_blank">Details →</a>
 
 </div>
 
@@ -174,7 +221,23 @@ container.innerHTML += card
 
 })
 
-})
+}
+
+function filterTools(category){
+
+if(category==="All"){
+
+displayTools(allTools)
+
+}else{
+
+let filtered = allTools.filter(t=>t.category===category)
+
+displayTools(filtered)
+
+}
+
+}
 
 </script>
 
