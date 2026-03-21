@@ -4,11 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
+<title id="title">AI Tool</title>
 
-<title>AI Tool</title>
+<meta name="description" id="metaDesc" content="AI tool details">
 
 <style>
-
 body{
 font-family:-apple-system,BlinkMacSystemFont;
 background:#f5f5f7;
@@ -16,7 +16,7 @@ padding:40px;
 }
 
 .container{
-max-width:800px;
+max-width:900px;
 margin:auto;
 background:white;
 padding:40px;
@@ -25,12 +25,34 @@ box-shadow:0 10px 20px rgba(0,0,0,0.05);
 }
 
 img{
-width:60px;
+width:70px;
+margin-bottom:10px;
+}
+
+h1{
+margin-bottom:10px;
+}
+
+.tag{
+display:inline-block;
+padding:5px 12px;
+background:#0071e3;
+color:white;
+border-radius:20px;
+font-size:12px;
+margin-bottom:15px;
+}
+
+.section{
+margin-top:20px;
+line-height:1.6;
+color:#555;
 }
 
 a{
 color:#0071e3;
 text-decoration:none;
+font-weight:500;
 }
 
 </style>
@@ -40,39 +62,50 @@ text-decoration:none;
 <body>
 
 <div class="container" id="tool">
-
 Loading...
-
 </div>
 
 <script>
 
 const params = new URLSearchParams(window.location.search)
-
 const name = params.get("name")
 
 fetch("data/tools.json")
-
 .then(res=>res.json())
-
 .then(tools=>{
 
 let tool = tools.find(t => t.name === name)
 
+if(!tool){
+document.getElementById("tool").innerHTML="Tool not found"
+return
+}
+
+// SEO 动态更新
+document.title = tool.name + " - AI Tool"
+document.getElementById("metaDesc").setAttribute("content", tool.description)
+
+// 页面内容
 document.getElementById("tool").innerHTML = `
 
 <img src="${tool.logo}">
 
 <h1>${tool.name}</h1>
 
-<p>${tool.description}</p>
+<div class="tag">${tool.category}</div>
+
+<div class="section">
+${tool.description}
+</div>
+
+<div class="section">
+${tool.longDescription || "This AI tool helps improve productivity, automate tasks, and enhance creativity. It is widely used in modern workflows."}
+</div>
 
 <br>
 
 <a href="${tool.url}" target="_blank">
-
 Visit Official Website →
-
 </a>
 
 `
