@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/zh", "destination": "/index.html" },
+    { "source": "/zh/tool/:slug", "destination": "/tool.html" }
+  ]
+}
