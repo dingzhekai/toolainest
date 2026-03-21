@@ -6,10 +6,17 @@
 <meta charset="UTF-8">
 <title>Best AI Tools Directory</title>
 
-<meta name="description" content="Discover the best AI tools for chat, image, video and productivity.">
-<link rel="icon" href="/favicon.png" type="image/png" sizes="32x32">
+<meta name="description" content="Discover the best AI tools for chat, image, video, writing, and productivity. Explore 100+ AI tools in one place.">
+<meta name="keywords" content="AI tools, ChatGPT, Midjourney, AI directory, best AI tools">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<!-- Adsense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4352814112694064"
-     crossorigin="anonymous"></script>
+crossorigin="anonymous"></script>
+
 <style>
 
 body{
@@ -19,8 +26,7 @@ background:#f5f5f7;
 color:#1d1d1f;
 }
 
-/* NAVBAR */
-
+/* NAV */
 .nav{
 display:flex;
 justify-content:space-between;
@@ -35,7 +41,6 @@ font-size:20px;
 }
 
 /* HERO */
-
 .hero{
 text-align:center;
 padding:80px 20px;
@@ -44,6 +49,7 @@ padding:80px 20px;
 .hero h1{
 font-size:48px;
 margin-bottom:10px;
+font-weight:600;
 }
 
 .hero p{
@@ -51,20 +57,34 @@ color:#6e6e73;
 font-size:20px;
 }
 
-/* FILTERS */
+/* SEARCH */
+.search-box{
+text-align:center;
+margin:30px 0;
+}
 
+.search-box input{
+padding:12px 20px;
+width:320px;
+border-radius:25px;
+border:1px solid #ddd;
+font-size:16px;
+}
+
+/* FILTER */
 .filters{
 text-align:center;
 margin-bottom:40px;
 }
 
 .filters button{
-padding:10px 20px;
+padding:10px 18px;
 border:none;
 border-radius:20px;
 margin:5px;
 background:#e8e8ed;
 cursor:pointer;
+transition:0.2s;
 }
 
 .filters button:hover{
@@ -73,7 +93,6 @@ color:white;
 }
 
 /* SECTION */
-
 .section{
 max-width:1200px;
 margin:auto;
@@ -81,7 +100,6 @@ padding:40px 20px;
 }
 
 /* GRID */
-
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -89,7 +107,6 @@ gap:20px;
 }
 
 /* CARD */
-
 .card{
 background:white;
 padding:25px;
@@ -99,11 +116,11 @@ transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-5px);
+transform:translateY(-6px);
 }
 
 .card img{
-width:40px;
+width:42px;
 margin-bottom:10px;
 }
 
@@ -114,18 +131,19 @@ margin:5px 0;
 .card p{
 color:#6e6e73;
 font-size:14px;
+min-height:40px;
 }
 
 .card a{
 display:inline-block;
-margin-top:8px;
+margin-top:10px;
 margin-right:10px;
 color:#0071e3;
 text-decoration:none;
+font-size:14px;
 }
 
 /* FOOTER */
-
 footer{
 text-align:center;
 padding:40px;
@@ -138,98 +156,82 @@ color:#6e6e73;
 
 <body>
 
+<!-- NAV -->
 <div class="nav">
-
 <div class="logo">AI Tools</div>
-
 </div>
 
+<!-- HERO -->
 <div class="hero">
-
-<h1>Discover AI Tools</h1>
-
-<p>100+ AI tools in one place</p>
-
+<h1>Explore the Future of AI</h1>
+<p>100+ AI tools for productivity, creativity and innovation</p>
 </div>
 
-<div class="section">
-<div style="text-align:center;margin:40px 0;">
+<!-- SEO 内容块（很重要） -->
+<div style="max-width:800px;margin:20px auto;text-align:center;color:#555;">
+Discover the best AI tools including chatbots, image generators, video creators, writing assistants, and coding tools. Our curated AI directory helps you find the right tool quickly.
+</div>
 
+<!-- ADS -->
+<div style="text-align:center;margin:40px 0;">
 <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4352814112694064"
-     data-ad-slot="1234567890"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+style="display:block"
+data-ad-client="ca-pub-4352814112694064"
+data-ad-slot="1234567890"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
 
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
 </div>
 
-<div style="text-align:center;margin-bottom:30px;">
-
+<!-- SEARCH -->
+<div class="search-box">
 <input 
 id="search"
 placeholder="Search AI tools..."
-style="
-padding:12px 20px;
-width:300px;
-border-radius:25px;
-border:1px solid #ddd;
-font-size:16px;
-"
 oninput="searchTools()"
 />
-
 </div>
 
+<!-- FILTER -->
 <div class="filters">
-
 <button onclick="filterTools('All')">All</button>
-<button onclick="filterTools('Chat')">Chat</button>
-<button onclick="filterTools('Image')">Image</button>
-<button onclick="filterTools('Video')">Video</button>
-<button onclick="filterTools('Writing')">Writing</button>
-<button onclick="filterTools('Coding')">Coding</button>
-
+<button onclick="filterTools('Chat')">💬 Chat</button>
+<button onclick="filterTools('Image')">🎨 Image</button>
+<button onclick="filterTools('Video')">🎬 Video</button>
+<button onclick="filterTools('Writing')">✍️ Writing</button>
+<button onclick="filterTools('Coding')">💻 Coding</button>
 </div>
 
+<!-- TOOLS -->
+<div class="section">
 <div class="grid" id="tools"></div>
-
 </div>
 
 <footer>
-
 © 2026 AI Tools Directory
-
 </footer>
 
 <script>
 
 let allTools=[]
 
+// 加载数据
 fetch("data/tools.json")
-
 .then(res=>res.json())
-
 .then(tools=>{
-
 allTools=tools
-
 displayTools(tools)
-
 })
 
+// 渲染工具
 function displayTools(tools){
-
 let container=document.getElementById("tools")
-
 container.innerHTML=""
 
 tools.forEach(tool=>{
-
 let card=`
 
 <div class="card">
@@ -241,48 +243,39 @@ onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/comm
 
 <p>${tool.description}</p>
 
-<a href="${tool.url}" target="_blank">Visit →</a>
+<div>
+<a href="tool.html?name=${encodeURIComponent(tool.name)}">Details</a>
+<a href="${tool.url}" target="_blank">Visit</a>
+</div>
 
 </div>
 
 `
-
 container.innerHTML+=card
-
 })
-
 }
 
+// 分类
 function filterTools(category){
-
 if(category==="All"){
-
 displayTools(allTools)
-
 }else{
-
 let filtered=allTools.filter(t=>t.category===category)
-
 displayTools(filtered)
-
 }
-function searchTools(){
+}
 
+// 搜索
+function searchTools(){
 let keyword=document.getElementById("search").value.toLowerCase()
 
-let filtered=allTools.filter(tool=>
-
+let filtered=allTools.filter(tool =>
 tool.name.toLowerCase().includes(keyword) ||
-
 tool.description.toLowerCase().includes(keyword) ||
-
 tool.category.toLowerCase().includes(keyword)
-
 )
 
 displayTools(filtered)
-
-}
 }
 
 </script>
