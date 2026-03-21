@@ -159,12 +159,17 @@ color:#6e6e73;
 <!-- NAV -->
 <div class="nav">
 <div class="logo">AI Tools</div>
+
+<div onclick="toggleLang()" style="cursor:pointer;background:#eee;padding:6px 12px;border-radius:12px;">
+EN / 中文
+</div>
+
 </div>
 
 <!-- HERO -->
 <div class="hero">
-<h1>Explore the Future of AI</h1>
-<p>100+ AI tools for productivity, creativity and innovation</p>
+<h1 id="title"></h1>
+<p id="subtitle"></p>
 </div>
 
 <!-- SEO 内容块（很重要） -->
@@ -188,11 +193,7 @@ data-full-width-responsive="true"></ins>
 
 <!-- SEARCH -->
 <div class="search-box">
-<input 
-id="search"
-placeholder="Search AI tools..."
-oninput="searchTools()"
-/>
+<input id="search" oninput="searchTools()" />
 </div>
 
 <!-- FILTER -->
@@ -215,7 +216,58 @@ oninput="searchTools()"
 </footer>
 
 <script>
+let currentLang = "en"
+  const text = {
+en:{
+title:"Explore the Future of AI",
+subtitle:"100+ AI tools for productivity, creativity and innovation",
+search:"Search AI tools...",
+all:"All",
+chat:"Chat",
+image:"Image",
+video:"Video",
+writing:"Writing",
+coding:"Coding",
+visit:"Visit",
+details:"Details",
+footer:"© 2026 AI Tools Directory"
+},
+zh:{
+title:"探索AI的未来",
+subtitle:"100+ AI工具一站式导航",
+search:"搜索AI工具...",
+all:"全部",
+chat:"聊天",
+image:"图像",
+video:"视频",
+writing:"写作",
+coding:"编程",
+visit:"访问",
+details:"详情",
+footer:"© 2026 AI工具导航"
+}
+}
+  function updateText(){
+let t = text[currentLang]
 
+document.getElementById("title").innerText = t.title
+document.getElementById("subtitle").innerText = t.subtitle
+document.getElementById("search").placeholder = t.search
+
+document.getElementById("f_all").innerText = t.all
+document.getElementById("f_chat").innerText = t.chat
+document.getElementById("f_img").innerText = t.image
+document.getElementById("f_vid").innerText = t.video
+document.getElementById("f_write").innerText = t.writing
+document.getElementById("f_code").innerText = t.coding
+
+document.getElementById("footer").innerText = t.footer
+}
+function toggleLang(){
+currentLang = currentLang === "en" ? "zh" : "en"
+updateText()
+displayTools(allTools)
+}
 let allTools=[]
 
 // 加载数据
@@ -223,6 +275,7 @@ fetch("data/tools.json")
 .then(res=>res.json())
 .then(tools=>{
 allTools=tools
+updateText()
 displayTools(tools)
 })
 
@@ -244,8 +297,8 @@ onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/comm
 <p>${tool.description}</p>
 
 <div>
-<a href="tool.html?name=${encodeURIComponent(tool.name)}">Details</a>
-<a href="${tool.url}" target="_blank">Visit</a>
+<a href="tool.html?name=${encodeURIComponent(tool.name)}">${text[currentLang].details}</a>
+<a href="${tool.url}" target="_blank">${text[currentLang].visit}</a>
 </div>
 
 </div>
