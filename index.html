@@ -75,32 +75,61 @@ border:1px solid #ddd;
 font-size:16px;
 }
 
-/* FILTER */
+/* LAYOUT */
+.section{
+max-width:1200px;
+margin:0 auto;
+padding:0 20px 40px;
+}
+
+.layout{
+display:grid;
+grid-template-columns:220px 1fr;
+gap:24px;
+align-items:start;
+}
+
+/* SIDEBAR */
+.sidebar{
+position:sticky;
+top:20px;
+background:white;
+border-radius:18px;
+padding:16px;
+box-shadow:0 10px 20px rgba(0,0,0,0.05);
+}
+
+.sidebar-title{
+font-size:14px;
+color:#6e6e73;
+margin:0 0 12px;
+}
+
 .filters{
-text-align:center;
-margin-bottom:40px;
+display:flex;
+flex-direction:column;
+gap:8px;
 }
 
 .filters button{
-padding:10px 18px;
+padding:10px 14px;
 border:none;
-border-radius:20px;
-margin:5px;
-background:#e8e8ed;
+border-radius:12px;
+text-align:left;
+background:transparent;
 cursor:pointer;
+font-size:14px;
+color:#1d1d1f;
 transition:0.2s;
 }
 
 .filters button:hover{
-background:#0071e3;
-color:white;
+background:#f5f5f7;
 }
 
-/* SECTION */
-.section{
-max-width:1200px;
-margin:auto;
-padding:40px 20px;
+.filters button.active{
+background:#0071e3;
+color:white;
 }
 
 /* GRID */
@@ -121,11 +150,6 @@ transition:0.3s;
 
 .card:hover{
 transform:translateY(-6px);
-}
-
-.card img{
-width:42px;
-margin-bottom:10px;
 }
 
 .card h3{
@@ -152,6 +176,16 @@ footer{
 text-align:center;
 padding:40px;
 color:#6e6e73;
+}
+
+@media (max-width:900px){
+.layout{
+grid-template-columns:1fr;
+}
+
+.sidebar{
+position:static;
+}
 }
 
 </style>
@@ -200,7 +234,11 @@ data-full-width-responsive="true"></ins>
 <input id="search" oninput="searchTools()" />
 </div>
 
-<!-- FILTER -->
+<!-- TOOLS -->
+<div class="section">
+<div class="layout">
+<aside class="sidebar">
+<p class="sidebar-title" id="category_title"></p>
 <div class="filters">
 <button onclick="filterTools('All')" id="f_all"></button>
 <button onclick="filterTools('Chat')" id="f_chat"></button>
@@ -209,10 +247,9 @@ data-full-width-responsive="true"></ins>
 <button onclick="filterTools('Writing')" id="f_write"></button>
 <button onclick="filterTools('Coding')" id="f_code"></button>
 </div>
-
-<!-- TOOLS -->
-<div class="section">
+</aside>
 <div class="grid" id="tools"></div>
+</div>
 </div>
 <div style="text-align:center;margin-top:20px;">
 
@@ -221,7 +258,7 @@ data-full-width-responsive="true"></ins>
 <a href="/contact.html">Contact</a>
 
 </div>
-<footer>
+<footer id="footer">
 © 2026 AI Tools Directory
 </footer>
 
@@ -248,7 +285,8 @@ writing:"Writing",
 coding:"Coding",
 visit:"Visit",
 details:"Details",
-footer:"© 2026 AI Tools Directory"
+footer:"© 2026 AI Tools Directory",
+categoryTitle:"Categories"
 },
 zh:{
 title:"探索AI的未来",
@@ -262,7 +300,8 @@ writing:"写作",
 coding:"编程",
 visit:"访问",
 details:"详情",
-footer:"© 2026 AI工具导航"
+footer:"© 2026 AI工具导航",
+categoryTitle:"分类"
 }
 }
 function updateText(){
@@ -278,11 +317,13 @@ document.getElementById("f_img").innerText = t.image
 document.getElementById("f_vid").innerText = t.video
 document.getElementById("f_write").innerText = t.writing
 document.getElementById("f_code").innerText = t.coding
+document.getElementById("category_title").innerText = t.categoryTitle
 
 document.getElementById("footer").innerText = t.footer
 }
 
 let allTools=[]
+let selectedCategory="All"
 
 // 加载数据
 fetch("data/tools.json")
@@ -290,7 +331,7 @@ fetch("data/tools.json")
 .then(tools=>{
 allTools=tools
 updateText()
-displayTools(tools)
+filterTools("All")
 })
 
 // 渲染工具
@@ -302,10 +343,6 @@ tools.forEach(tool=>{
 let card=`
 
 <div class="card">
-
-<img src="${tool.logo}" 
-onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';">
-
 <h3>${tool.name}</h3>
 
 <p>${tool.description}</p>
@@ -324,6 +361,11 @@ container.innerHTML+=card
 
 // 分类
 function filterTools(category){
+selectedCategory=category
+document.querySelectorAll(".filters button").forEach(btn=>{
+btn.classList.toggle("active", btn.getAttribute("onclick").includes(`'${category}'`))
+})
+
 if(category==="All"){
 displayTools(allTools)
 }else{
@@ -336,7 +378,11 @@ displayTools(filtered)
 function searchTools(){
 let keyword=document.getElementById("search").value.toLowerCase()
 
-let filtered=allTools.filter(tool =>
+let scopedTools = selectedCategory==="All"
+? allTools
+: allTools.filter(t=>t.category===selectedCategory)
+
+let filtered=scopedTools.filter(tool =>
 tool.name.toLowerCase().includes(keyword) ||
 tool.description.toLowerCase().includes(keyword) ||
 tool.category.toLowerCase().includes(keyword)
