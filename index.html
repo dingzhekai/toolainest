@@ -56,20 +56,60 @@ color:#111827;
 
 .lang-switch{
 align-items:center;
-background:rgba(255,255,255,0.72);
+background:rgba(232,235,241,0.78);
 border:1px solid rgba(210,214,222,0.78);
 border-radius:999px;
-color:#3f4652;
 cursor:pointer;
 display:flex;
+gap:0;
 font-size:14px;
-padding:8px 14px;
+height:38px;
+padding:3px;
+position:relative;
 transition:0.2s;
+width:118px;
+box-sizing:border-box;
 }
 
 .lang-switch:hover{
-background:white;
 box-shadow:0 10px 24px rgba(24,39,75,0.09);
+}
+
+.lang-switch:focus-visible{
+outline:2px solid rgba(0,113,227,0.42);
+outline-offset:3px;
+}
+
+.lang-switch-knob{
+background:rgba(255,255,255,0.96);
+border-radius:999px;
+box-shadow:0 6px 16px rgba(24,39,75,0.14);
+height:30px;
+left:3px;
+position:absolute;
+top:3px;
+transition:transform 0.24s ease;
+width:55px;
+}
+
+.lang-switch.zh .lang-switch-knob{
+transform:translateX(57px);
+}
+
+.lang-switch span{
+align-items:center;
+color:#5f6673;
+display:flex;
+flex:1;
+font-weight:600;
+justify-content:center;
+position:relative;
+z-index:1;
+}
+
+.lang-switch.en .lang-en,
+.lang-switch.zh .lang-zh{
+color:#111827;
 }
 
 /* HERO */
@@ -297,9 +337,11 @@ border-radius:14px;
 <div class="nav">
 <div class="logo">AI Tools</div>
 
-<div class="lang-switch" onclick="switchLang()">
-EN / 中文
-</div>
+<button class="lang-switch" id="lang_switch" onclick="switchLang()" type="button" aria-label="Switch language">
+<span class="lang-switch-knob"></span>
+<span class="lang-en">EN</span>
+<span class="lang-zh">中文</span>
+</button>
 
 </div>
 
@@ -410,6 +452,7 @@ document.getElementById("title").innerText = t.title
 document.getElementById("subtitle").innerText = t.subtitle
 document.getElementById("search").placeholder = t.search
 document.getElementById("category_title").innerText = t.categories
+document.getElementById("lang_switch").className = "lang-switch " + currentLang
 
 document.getElementById("footer").innerText = t.footer
 }
