@@ -56,19 +56,22 @@ color:#111827;
 
 .lang-switch{
 align-items:center;
+appearance:none;
 background:rgba(232,235,241,0.78);
 border:1px solid rgba(210,214,222,0.78);
 border-radius:999px;
+box-sizing:border-box;
 cursor:pointer;
 display:flex;
 gap:0;
 font-size:14px;
-height:38px;
-padding:3px;
+height:40px;
+line-height:1;
+overflow:hidden;
+padding:4px;
 position:relative;
-transition:0.2s;
-width:118px;
-box-sizing:border-box;
+transition:box-shadow 0.2s ease,background 0.2s ease;
+width:124px;
 }
 
 .lang-switch:hover{
@@ -84,19 +87,23 @@ outline-offset:3px;
 background:rgba(255,255,255,0.96);
 border-radius:999px;
 box-shadow:0 6px 16px rgba(24,39,75,0.14);
+display:block;
+flex:none;
 height:30px;
-left:3px;
+left:4px;
 position:absolute;
-top:3px;
-transition:transform 0.24s ease;
-width:55px;
+top:4px;
+transition:transform 0.32s cubic-bezier(0.22,1,0.36,1);
+width:56px;
+z-index:0;
 }
 
 .lang-switch.zh .lang-switch-knob{
-transform:translateX(57px);
+transform:translateX(60px);
 }
 
-.lang-switch span{
+.lang-switch .lang-en,
+.lang-switch .lang-zh{
 align-items:center;
 color:#5f6673;
 display:flex;
@@ -104,6 +111,7 @@ flex:1;
 font-weight:600;
 justify-content:center;
 position:relative;
+transition:color 0.22s ease;
 z-index:1;
 }
 
@@ -401,11 +409,14 @@ data-full-width-responsive="true"></ins>
 
 <script>
 function switchLang(){
-if(currentLang==="en"){
-location.href="/zh"
-}else{
-location.href="/"
-}
+let nextLang=currentLang==="en" ? "zh" : "en"
+let nextPath=nextLang==="zh" ? "/zh" : "/"
+let switchButton=document.getElementById("lang_switch")
+switchButton.className="lang-switch " + nextLang
+switchButton.disabled=true
+setTimeout(()=>{
+location.href=nextPath
+},180)
 }
 let currentLang = location.pathname.startsWith("/zh") ? "zh" : "en"
 
