@@ -40,7 +40,9 @@ min-height:100vh;
 
 /* NAV */
 .nav{
+align-items:center;
 display:flex;
+gap:24px;
 justify-content:space-between;
 padding:20px 40px;
 background:rgba(255,255,255,0.74);
@@ -52,12 +54,81 @@ top:0;
 z-index:10;
 }
 
+.nav-left{
+align-items:center;
+display:flex;
+gap:14px;
+min-width:0;
+}
+
 .logo{
 font-family:var(--font-serif);
 font-weight:600;
 font-size:20px;
 letter-spacing:0;
 color:#111827;
+}
+
+.nav-badge{
+background:rgba(17,24,39,0.08);
+border:1px solid rgba(17,24,39,0.08);
+border-radius:999px;
+color:#424a57;
+font-size:12px;
+font-weight:600;
+line-height:1;
+padding:7px 10px;
+white-space:nowrap;
+}
+
+.nav-links{
+align-items:center;
+display:flex;
+gap:6px;
+justify-content:center;
+min-width:0;
+}
+
+.nav-links a{
+border-radius:999px;
+color:#424a57;
+font-size:14px;
+font-weight:600;
+padding:9px 13px;
+text-decoration:none;
+transition:background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+white-space:nowrap;
+}
+
+.nav-links a:hover{
+background:rgba(255,255,255,0.9);
+box-shadow:0 8px 20px rgba(24,39,75,0.08);
+color:#111827;
+}
+
+.nav-actions{
+align-items:center;
+display:flex;
+gap:12px;
+}
+
+.submit-link{
+background:#111827;
+border-radius:999px;
+box-shadow:0 12px 26px rgba(17,24,39,0.16);
+color:white;
+font-size:14px;
+font-weight:600;
+padding:11px 15px;
+text-decoration:none;
+transition:background 0.2s ease,box-shadow 0.2s ease,transform 0.2s ease;
+white-space:nowrap;
+}
+
+.submit-link:hover{
+background:#252b36;
+box-shadow:0 16px 32px rgba(17,24,39,0.2);
+transform:translateY(-1px);
 }
 
 .lang-switch{
@@ -331,6 +402,34 @@ color:#707784;
 }
 
 @media (max-width:760px){
+.nav{
+align-items:flex-start;
+flex-direction:column;
+gap:14px;
+padding:16px;
+}
+
+.nav-left,
+.nav-actions{
+justify-content:space-between;
+width:100%;
+}
+
+.nav-links{
+justify-content:flex-start;
+overflow-x:auto;
+padding-bottom:2px;
+width:100%;
+}
+
+.nav-links a{
+background:rgba(255,255,255,0.58);
+}
+
+.submit-link{
+padding:11px 14px;
+}
+
 .content-layout{
 grid-template-columns:1fr;
 padding:12px;
@@ -352,13 +451,26 @@ border-radius:14px;
 
 <!-- NAV -->
 <div class="nav">
+<div class="nav-left">
 <div class="logo">AI Tools</div>
+<span class="nav-badge" id="nav_count"></span>
+</div>
 
+<nav class="nav-links" aria-label="Primary navigation">
+<a href="#tools" id="nav_browse"></a>
+<a href="#category_title" id="nav_categories"></a>
+<a href="/about.html" id="nav_about"></a>
+<a href="/contact.html" id="nav_contact"></a>
+</nav>
+
+<div class="nav-actions">
+<a class="submit-link" href="mailto:3586206523@email.com" id="nav_submit"></a>
 <button class="lang-switch" id="lang_switch" onclick="switchLang()" type="button" aria-label="Switch language">
 <span class="lang-switch-knob"></span>
 <span class="lang-en">EN</span>
 <span class="lang-zh">中文</span>
 </button>
+</div>
 
 </div>
 
@@ -435,6 +547,14 @@ title:"Explore the Future of AI",
 subtitle:"100+ AI tools for productivity, creativity and innovation",
 search:"Search AI tools...",
 categories:"Categories",
+nav:{
+browse:"Browse",
+categories:"Categories",
+about:"About",
+contact:"Contact",
+submit:"Submit tool",
+countSuffix:" tools"
+},
 categoryLabels:{
 All:"All",
 Chat:"Chat",
@@ -452,6 +572,14 @@ title:"探索AI的未来",
 subtitle:"100+ AI工具一站式导航",
 search:"搜索AI工具...",
 categories:"类别",
+nav:{
+browse:"浏览",
+categories:"分类",
+about:"关于",
+contact:"联系",
+submit:"提交工具",
+countSuffix:" 个工具"
+},
 categoryLabels:{
 All:"全部",
 Chat:"聊天",
@@ -473,6 +601,12 @@ document.getElementById("subtitle").innerText = t.subtitle
 document.getElementById("search").placeholder = t.search
 document.getElementById("category_title").innerText = t.categories
 document.getElementById("lang_switch").className = "lang-switch " + currentLang
+document.getElementById("nav_browse").innerText = t.nav.browse
+document.getElementById("nav_categories").innerText = t.nav.categories
+document.getElementById("nav_about").innerText = t.nav.about
+document.getElementById("nav_contact").innerText = t.nav.contact
+document.getElementById("nav_submit").innerText = t.nav.submit
+document.getElementById("nav_count").innerText = allTools.length + t.nav.countSuffix
 
 document.getElementById("footer").innerText = t.footer
 }
