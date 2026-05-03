@@ -17,6 +17,20 @@
 
 <link rel="canonical" href="https://toolainest.top/">
 
+<script>
+let savedTheme=null
+try{
+savedTheme=localStorage.getItem("theme")
+}catch(error){
+savedTheme=null
+}
+if(savedTheme!=="dark" && savedTheme!=="light"){
+savedTheme=null
+}
+let prefersDark=window.matchMedia("(prefers-color-scheme: dark)").matches
+document.documentElement.dataset.theme=savedTheme || (prefersDark ? "dark" : "light")
+</script>
+
 <!-- Adsense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4352814112694064"
 crossorigin="anonymous"></script>
@@ -26,16 +40,65 @@ crossorigin="anonymous"></script>
 :root{
 --font-sans:"Inter","Avenir Next","Helvetica Neue",Arial,sans-serif;
 --font-serif:Georgia,Cambria,"Times New Roman",serif;
+--page-bg:
+linear-gradient(135deg,rgba(10,132,255,0.12),rgba(48,209,88,0.08) 34%,rgba(255,159,10,0.09) 68%,rgba(255,255,255,0) 100%),
+linear-gradient(180deg,#fbfbfd 0%,#f4f5f9 44%,#eef1f6 100%);
+--text-primary:#1d1d1f;
+--text-strong:#111827;
+--text-heading:#161a22;
+--text-secondary:#5f6673;
+--text-muted:#69707d;
+--surface-nav:rgba(255,255,255,0.74);
+--surface-card:rgba(255,255,255,0.86);
+--surface-card-hover:white;
+--surface-soft:rgba(242,244,248,0.86);
+--surface-pill:rgba(232,235,241,0.78);
+--surface-pill-knob:rgba(255,255,255,0.96);
+--border-light:rgba(255,255,255,0.78);
+--border-control:rgba(210,214,222,0.78);
+--shadow-soft:rgba(24,39,75,0.08);
+--shadow-medium:rgba(24,39,75,0.13);
+--accent:#0071e3;
+--accent-hover:#004f9f;
+--active-bg:#111827;
+--active-text:white;
+color-scheme:light;
+}
+
+:root[data-theme="dark"]{
+--page-bg:
+radial-gradient(circle at 18% 12%,rgba(0,113,227,0.22),rgba(0,0,0,0) 30%),
+radial-gradient(circle at 84% 18%,rgba(52,199,89,0.16),rgba(0,0,0,0) 28%),
+linear-gradient(180deg,#111318 0%,#181b22 46%,#0d1117 100%);
+--text-primary:#f3f4f6;
+--text-strong:#f9fafb;
+--text-heading:#f7f1e8;
+--text-secondary:#b9c0cc;
+--text-muted:#a2aab8;
+--surface-nav:rgba(19,22,29,0.78);
+--surface-card:rgba(28,32,41,0.82);
+--surface-card-hover:rgba(35,40,51,0.94);
+--surface-soft:rgba(39,45,58,0.82);
+--surface-pill:rgba(39,45,58,0.78);
+--surface-pill-knob:rgba(246,241,232,0.96);
+--border-light:rgba(255,255,255,0.1);
+--border-control:rgba(255,255,255,0.14);
+--shadow-soft:rgba(0,0,0,0.26);
+--shadow-medium:rgba(0,0,0,0.36);
+--accent:#7ab7ff;
+--accent-hover:#b6d8ff;
+--active-bg:#f6f1e8;
+--active-text:#15171c;
+color-scheme:dark;
 }
 
 body{
 font-family:var(--font-sans);
 margin:0;
-background:
-linear-gradient(135deg,rgba(10,132,255,0.12),rgba(48,209,88,0.08) 34%,rgba(255,159,10,0.09) 68%,rgba(255,255,255,0) 100%),
-linear-gradient(180deg,#fbfbfd 0%,#f4f5f9 44%,#eef1f6 100%);
-color:#1d1d1f;
+background:var(--page-bg);
+color:var(--text-primary);
 min-height:100vh;
+transition:background 0.25s ease,color 0.25s ease;
 }
 
 /* NAV */
@@ -45,10 +108,10 @@ display:flex;
 gap:24px;
 justify-content:space-between;
 padding:20px 40px;
-background:rgba(255,255,255,0.74);
+background:var(--surface-nav);
 backdrop-filter:blur(22px);
-border-bottom:1px solid rgba(255,255,255,0.72);
-box-shadow:0 10px 30px rgba(24,39,75,0.06);
+border-bottom:1px solid var(--border-light);
+box-shadow:0 10px 30px var(--shadow-soft);
 position:sticky;
 top:0;
 z-index:10;
@@ -66,14 +129,14 @@ font-family:var(--font-serif);
 font-weight:600;
 font-size:20px;
 letter-spacing:0;
-color:#111827;
+color:var(--text-strong);
 }
 
 .nav-badge{
-background:rgba(17,24,39,0.08);
-border:1px solid rgba(17,24,39,0.08);
+background:var(--surface-soft);
+border:1px solid var(--border-control);
 border-radius:999px;
-color:#424a57;
+color:var(--text-secondary);
 font-size:12px;
 font-weight:600;
 line-height:1;
@@ -91,7 +154,7 @@ min-width:0;
 
 .nav-links a{
 border-radius:999px;
-color:#424a57;
+color:var(--text-secondary);
 font-size:14px;
 font-weight:600;
 padding:9px 13px;
@@ -101,22 +164,23 @@ white-space:nowrap;
 }
 
 .nav-links a:hover{
-background:rgba(255,255,255,0.9);
-box-shadow:0 8px 20px rgba(24,39,75,0.08);
-color:#111827;
+background:var(--surface-card-hover);
+box-shadow:0 8px 20px var(--shadow-soft);
+color:var(--text-strong);
 }
 
 .nav-actions{
 align-items:center;
 display:flex;
+flex-wrap:wrap;
 gap:12px;
 }
 
 .submit-link{
-background:#111827;
+background:var(--active-bg);
 border-radius:999px;
-box-shadow:0 12px 26px rgba(17,24,39,0.16);
-color:white;
+box-shadow:0 12px 26px var(--shadow-medium);
+color:var(--active-text);
 font-size:14px;
 font-weight:600;
 padding:11px 15px;
@@ -126,16 +190,80 @@ white-space:nowrap;
 }
 
 .submit-link:hover{
-background:#252b36;
-box-shadow:0 16px 32px rgba(17,24,39,0.2);
+background:var(--text-heading);
+box-shadow:0 16px 32px var(--shadow-medium);
 transform:translateY(-1px);
+}
+
+.theme-switch{
+align-items:center;
+appearance:none;
+background:var(--surface-pill);
+border:1px solid var(--border-control);
+border-radius:999px;
+box-sizing:border-box;
+cursor:pointer;
+display:flex;
+font-size:13px;
+height:40px;
+line-height:1;
+overflow:hidden;
+padding:4px;
+position:relative;
+transition:box-shadow 0.2s ease,background 0.2s ease;
+width:118px;
+}
+
+.theme-switch:hover{
+box-shadow:0 10px 24px var(--shadow-soft);
+}
+
+.theme-switch:focus-visible{
+outline:2px solid rgba(0,113,227,0.42);
+outline-offset:3px;
+}
+
+.theme-switch-knob{
+background:var(--surface-pill-knob);
+border-radius:999px;
+box-shadow:0 6px 16px var(--shadow-soft);
+display:block;
+height:30px;
+left:4px;
+position:absolute;
+top:4px;
+transition:transform 0.32s cubic-bezier(0.22,1,0.36,1);
+width:54px;
+z-index:0;
+}
+
+.theme-switch.dark .theme-switch-knob{
+transform:translateX(56px);
+}
+
+.theme-switch .theme-light,
+.theme-switch .theme-dark{
+align-items:center;
+color:var(--text-secondary);
+display:flex;
+flex:1;
+font-weight:600;
+justify-content:center;
+position:relative;
+transition:color 0.22s ease;
+z-index:1;
+}
+
+.theme-switch.light .theme-light,
+.theme-switch.dark .theme-dark{
+color:var(--text-strong);
 }
 
 .lang-switch{
 align-items:center;
 appearance:none;
-background:rgba(232,235,241,0.78);
-border:1px solid rgba(210,214,222,0.78);
+background:var(--surface-pill);
+border:1px solid var(--border-control);
 border-radius:999px;
 box-sizing:border-box;
 cursor:pointer;
@@ -152,7 +280,7 @@ width:124px;
 }
 
 .lang-switch:hover{
-box-shadow:0 10px 24px rgba(24,39,75,0.09);
+box-shadow:0 10px 24px var(--shadow-soft);
 }
 
 .lang-switch:focus-visible{
@@ -161,9 +289,9 @@ outline-offset:3px;
 }
 
 .lang-switch-knob{
-background:rgba(255,255,255,0.96);
+background:var(--surface-pill-knob);
 border-radius:999px;
-box-shadow:0 6px 16px rgba(24,39,75,0.14);
+box-shadow:0 6px 16px var(--shadow-soft);
 display:block;
 flex:none;
 height:30px;
@@ -182,7 +310,7 @@ transform:translateX(60px);
 .lang-switch .lang-en,
 .lang-switch .lang-zh{
 align-items:center;
-color:#5f6673;
+color:var(--text-secondary);
 display:flex;
 flex:1;
 font-weight:600;
@@ -194,7 +322,7 @@ z-index:1;
 
 .lang-switch.en .lang-en,
 .lang-switch.zh .lang-zh{
-color:#111827;
+color:var(--text-strong);
 }
 
 /* HERO */
@@ -215,8 +343,15 @@ background-clip:text;
 color:transparent;
 }
 
+:root[data-theme="dark"] .hero h1{
+background:linear-gradient(90deg,#f7f1e8 0%,#7ab7ff 42%,#9fe3bd 72%,#f5dfc8 100%);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
 .hero p{
-color:#5f6673;
+color:var(--text-secondary);
 font-size:20px;
 margin:0;
 }
@@ -225,7 +360,7 @@ margin:0;
 max-width:800px;
 margin:0 auto 10px;
 text-align:center;
-color:#565d69;
+color:var(--text-secondary);
 line-height:1.7;
 }
 
@@ -236,20 +371,21 @@ margin:28px 0;
 }
 
 .search-box input{
-background:rgba(255,255,255,0.82);
-box-shadow:0 14px 34px rgba(24,39,75,0.08);
+background:var(--surface-card);
+box-shadow:0 14px 34px var(--shadow-soft);
 padding:14px 20px;
 width:min(420px,calc(100% - 48px));
 border-radius:25px;
-border:1px solid rgba(210,214,222,0.86);
+border:1px solid var(--border-control);
+color:var(--text-primary);
 font-size:16px;
 outline:none;
 transition:0.2s;
 }
 
 .search-box input:focus{
-background:white;
-border-color:#0071e3;
+background:var(--surface-card-hover);
+border-color:var(--accent);
 box-shadow:0 18px 42px rgba(0,113,227,0.16);
 }
 
@@ -269,18 +405,18 @@ top:20px;
 align-self:start;
 max-height:calc(100vh - 40px);
 overflow-y:auto;
-background:rgba(255,255,255,0.72);
+background:var(--surface-nav);
 backdrop-filter:blur(18px);
 border-radius:18px;
-border:1px solid rgba(255,255,255,0.78);
-box-shadow:0 18px 44px rgba(24,39,75,0.08);
+border:1px solid var(--border-light);
+box-shadow:0 18px 44px var(--shadow-soft);
 padding:16px;
 }
 
 .sidebar-title{
 font-weight:600;
 margin:4px 0 12px;
-color:#252b36;
+color:var(--text-heading);
 }
 
 /* FILTER */
@@ -295,23 +431,23 @@ width:100%;
 padding:11px 14px;
 border:1px solid transparent;
 border-radius:10px;
-background:rgba(242,244,248,0.86);
-color:#424a57;
+background:var(--surface-soft);
+color:var(--text-secondary);
 cursor:pointer;
 transition:0.2s;
 text-align:left;
 }
 
 .filters button:hover{
-background:white;
+background:var(--surface-card-hover);
 border-color:rgba(0,113,227,0.18);
-box-shadow:0 8px 18px rgba(24,39,75,0.07);
+box-shadow:0 8px 18px var(--shadow-soft);
 }
 
 .filters button.active{
-background:#111827;
-color:white;
-box-shadow:0 12px 26px rgba(17,24,39,0.18);
+background:var(--active-bg);
+color:var(--active-text);
+box-shadow:0 12px 26px var(--shadow-medium);
 }
 
 /* SECTION */
@@ -328,12 +464,12 @@ gap:20px;
 
 /* CARD */
 .card{
-background:rgba(255,255,255,0.86);
-border:1px solid rgba(255,255,255,0.82);
+background:var(--surface-card);
+border:1px solid var(--border-light);
 border-top:3px solid #0071e3;
 padding:25px;
 border-radius:18px;
-box-shadow:0 18px 44px rgba(24,39,75,0.08);
+box-shadow:0 18px 44px var(--shadow-soft);
 transition:0.3s;
 position:relative;
 overflow:hidden;
@@ -341,8 +477,8 @@ overflow:hidden;
 
 .card:hover{
 transform:translateY(-6px);
-background:white;
-box-shadow:0 24px 58px rgba(24,39,75,0.13);
+background:var(--surface-card-hover);
+box-shadow:0 24px 58px var(--shadow-medium);
 }
 
 .card[data-category="Chat"]{
@@ -370,11 +506,11 @@ font-family:var(--font-serif);
 margin:3px 0 8px;
 font-size:20px;
 font-weight:500;
-color:#161a22;
+color:var(--text-heading);
 }
 
 .card p{
-color:#69707d;
+color:var(--text-muted);
 font-size:14px;
 min-height:40px;
 line-height:1.55;
@@ -384,21 +520,35 @@ line-height:1.55;
 display:inline-block;
 margin-top:10px;
 margin-right:10px;
-color:#0071e3;
+color:var(--accent);
 text-decoration:none;
 font-size:14px;
 font-weight:500;
 }
 
 .card a:hover{
-color:#004f9f;
+color:var(--accent-hover);
 }
 
 /* FOOTER */
 footer{
 text-align:center;
 padding:40px;
-color:#707784;
+color:var(--text-secondary);
+}
+
+.footer-links{
+text-align:center;
+margin-top:20px;
+}
+
+.footer-links a{
+color:var(--accent);
+text-decoration:none;
+}
+
+.footer-links a:hover{
+color:var(--accent-hover);
 }
 
 @media (max-width:760px){
@@ -411,8 +561,11 @@ padding:16px;
 
 .nav-left,
 .nav-actions{
-justify-content:space-between;
 width:100%;
+}
+
+.nav-actions{
+justify-content:flex-start;
 }
 
 .nav-links{
@@ -423,7 +576,7 @@ width:100%;
 }
 
 .nav-links a{
-background:rgba(255,255,255,0.58);
+background:var(--surface-card);
 }
 
 .submit-link{
@@ -465,6 +618,11 @@ border-radius:14px;
 
 <div class="nav-actions">
 <a class="submit-link" href="mailto:3586206523@email.com" id="nav_submit"></a>
+<button class="theme-switch" id="theme_switch" onclick="switchTheme()" type="button" aria-label="Switch theme">
+<span class="theme-switch-knob"></span>
+<span class="theme-light" id="theme_light"></span>
+<span class="theme-dark" id="theme_dark"></span>
+</button>
 <button class="lang-switch" id="lang_switch" onclick="switchLang()" type="button" aria-label="Switch language">
 <span class="lang-switch-knob"></span>
 <span class="lang-en">EN</span>
@@ -517,7 +675,7 @@ data-full-width-responsive="true"></ins>
 </main>
 
 </div>
-<div style="text-align:center;margin-top:20px;">
+<div class="footer-links">
 
 <a href="/about.html">About</a> |
 <a href="/privacy.html">Privacy</a> |
@@ -529,6 +687,34 @@ data-full-width-responsive="true"></ins>
 </footer>
 
 <script>
+function getPreferredTheme(){
+return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+}
+
+function applyTheme(theme){
+currentTheme=theme
+document.documentElement.dataset.theme=theme
+try{
+localStorage.setItem("theme",theme)
+}catch(error){
+}
+updateThemeSwitch()
+}
+
+function switchTheme(){
+applyTheme(currentTheme==="dark" ? "light" : "dark")
+}
+
+function updateThemeSwitch(){
+let switchButton=document.getElementById("theme_switch")
+if(!switchButton){
+return
+}
+switchButton.className="theme-switch " + currentTheme
+switchButton.setAttribute("aria-pressed",currentTheme==="dark" ? "true" : "false")
+switchButton.setAttribute("aria-label",currentTheme==="dark" ? text[currentLang].theme.lightAria : text[currentLang].theme.darkAria)
+}
+
 function switchLang(){
 let nextLang=currentLang==="en" ? "zh" : "en"
 let nextPath=nextLang==="zh" ? "/zh" : "/"
@@ -540,6 +726,7 @@ location.href=nextPath
 },180)
 }
 let currentLang = location.pathname.startsWith("/zh") ? "zh" : "en"
+let currentTheme = document.documentElement.dataset.theme || getPreferredTheme()
 
 const text = {
 en:{
@@ -554,6 +741,12 @@ about:"About",
 contact:"Contact",
 submit:"Submit tool",
 countSuffix:" tools"
+},
+theme:{
+light:"Light",
+dark:"Dark",
+lightAria:"Switch to light mode",
+darkAria:"Switch to dark mode"
 },
 categoryLabels:{
 All:"All",
@@ -579,6 +772,12 @@ about:"关于",
 contact:"联系",
 submit:"提交工具",
 countSuffix:" 个工具"
+},
+theme:{
+light:"浅色",
+dark:"深色",
+lightAria:"切换到浅色模式",
+darkAria:"切换到深色模式"
 },
 categoryLabels:{
 All:"全部",
@@ -607,6 +806,9 @@ document.getElementById("nav_about").innerText = t.nav.about
 document.getElementById("nav_contact").innerText = t.nav.contact
 document.getElementById("nav_submit").innerText = t.nav.submit
 document.getElementById("nav_count").innerText = allTools.length + t.nav.countSuffix
+document.getElementById("theme_light").innerText = t.theme.light
+document.getElementById("theme_dark").innerText = t.theme.dark
+updateThemeSwitch()
 
 document.getElementById("footer").innerText = t.footer
 }
