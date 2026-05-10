@@ -651,7 +651,7 @@ background:linear-gradient(90deg,#0071e3,#34c759);
 border-radius:999px;
 display:block;
 height:100%;
-width:calc(var(--value) * 20%);
+width:calc(var(--value) * 1%);
 }
 
 .metric-score{
@@ -748,6 +748,13 @@ font-size:12px;
 font-weight:700;
 padding:6px 8px;
 white-space:nowrap;
+}
+
+.source-note{
+color:var(--text-muted);
+font-size:12px;
+line-height:1.45;
+margin:14px 0 0;
 }
 
 footer{
@@ -951,7 +958,7 @@ let currentTheme=document.documentElement.dataset.theme || getPreferredTheme()
 const text={
 en:{
 title:"AI Model Version Comparison",
-subtitle:"Choose any two companies, model families, or exact versions, then compare strengths with visual indicators.",
+subtitle:"Choose any two companies, model families, or exact versions, then compare them across benchmark-style task domains.",
 badge:"Model lab",
 home:"Browse",
 compare:"Compare",
@@ -962,9 +969,10 @@ left:"Compare side A",
 right:"Compare side B",
 versus:"VS",
 catalogTitle:"Version catalog",
-catalogSubtitle:"Browse representative versions under each company. Scores are editorial summaries for quick visual comparison.",
+catalogSubtitle:"Browse representative versions under each company. The 100-point domain scores are normalized editorial indices inspired by benchmark categories such as coding, vision, document reasoning, long-context work, and token efficiency.",
 allCompanies:"All companies",
 bestFor:"Best for",
+sourceLabel:"Basis",
 footer:"© 2026 AI Tools Directory",
 theme:{
 light:"Light",
@@ -973,17 +981,20 @@ lightAria:"Switch to light mode",
 darkAria:"Switch to dark mode"
 },
 metrics:{
-reason:"Reasoning",
-write:"Writing",
-code:"Coding",
-speed:"Speed",
-multi:"Multimodal",
-open:"Open"
+code:"Software engineering",
+agent:"Long-running tasks",
+vision:"Vision detail",
+docs:"Document reasoning",
+context:"Long context",
+instruct:"Instruction following",
+efficiency:"Token efficiency",
+safety:"Safety alignment",
+open:"Open deployment"
 }
 },
 zh:{
 title:"AI 模型版本对比",
-subtitle:"选择任意两个公司、模型家族或具体版本，用图标和能力条快速看出差异。",
+subtitle:"选择任意两个公司、模型家族或具体版本，按更接近基准测试的任务域做横向对比。",
 badge:"模型对比",
 home:"浏览",
 compare:"对比",
@@ -994,9 +1005,10 @@ left:"对比方 A",
 right:"对比方 B",
 versus:"VS",
 catalogTitle:"版本目录",
-catalogSubtitle:"按公司展示代表性版本。分数是便于快速浏览的编辑型概览，用来帮助用户初筛。",
+catalogSubtitle:"按公司展示代表性版本。100 分制任务域分数是标准化编辑指数，参考编码、视觉、文档推理、长上下文和 Token 效率等基准分类。",
 allCompanies:"全部公司",
 bestFor:"适合",
+sourceLabel:"依据",
 footer:"© 2026 AI工具导航",
 theme:{
 light:"浅色",
@@ -1005,38 +1017,47 @@ lightAria:"切换到浅色模式",
 darkAria:"切换到深色模式"
 },
 metrics:{
-reason:"推理",
-write:"写作",
-code:"编程",
-speed:"速度",
-multi:"多模态",
-open:"开放"
+code:"软件工程",
+agent:"长程任务",
+vision:"视觉细节",
+docs:"文档推理",
+context:"长上下文",
+instruct:"指令遵循",
+efficiency:"Token 效率",
+safety:"安全对齐",
+open:"开放部署"
 }
 }
 }
 
 const models=[
-{id:"gpt-5-5",company:"OpenAI",family:"GPT",version:"GPT-5.5",initials:"5.5",summary:{en:"Flagship GPT option for complex reasoning, coding, multimodal work, and general productivity.",zh:"旗舰 GPT 选项，适合复杂推理、编程、多模态任务和通用生产力。"},bestFor:{en:["Reasoning","Coding","Daily work"],zh:["推理","编程","日常效率"]},metrics:{reason:5,write:5,code:5,speed:4,multi:5,open:2}},
-{id:"gpt-5-4",company:"OpenAI",family:"GPT",version:"GPT-5.4",initials:"5.4",summary:{en:"Balanced GPT version for everyday assistant workflows with strong writing and coding coverage.",zh:"均衡型 GPT 版本，覆盖日常助手、写作和编程工作流。"},bestFor:{en:["Assistant","Writing","Coding"],zh:["助手","写作","编程"]},metrics:{reason:5,write:5,code:5,speed:4,multi:5,open:2}},
-{id:"gpt-5-3-codex",company:"OpenAI",family:"GPT",version:"GPT-5.3 Codex",initials:"CX",summary:{en:"Coding-focused GPT version for repository work, debugging, refactors, and implementation tasks.",zh:"偏编程的 GPT 版本，适合代码库工作、调试、重构和实现任务。"},bestFor:{en:["Codebases","Debugging","Agents"],zh:["代码库","调试","智能体"]},metrics:{reason:5,write:4,code:5,speed:4,multi:4,open:2}},
-{id:"gpt-4-1",company:"OpenAI",family:"GPT",version:"GPT-4.1",initials:"4.1",summary:{en:"General GPT version with broad compatibility for chat, writing, code, and structured tasks.",zh:"通用 GPT 版本，适合聊天、写作、代码和结构化任务。"},bestFor:{en:["General use","Compatibility","Writing"],zh:["通用","兼容","写作"]},metrics:{reason:4,write:5,code:4,speed:4,multi:4,open:2}},
-{id:"opus-4-7",company:"Anthropic",family:"Claude Opus",version:"Opus-4.7",initials:"O4",summary:{en:"High-end Claude version for careful analysis, long-form writing, planning, and document-heavy workflows.",zh:"高端 Claude 版本，适合严谨分析、长文写作、规划和文档密集型任务。"},bestFor:{en:["Analysis","Writing","Documents"],zh:["分析","写作","文档"]},metrics:{reason:5,write:5,code:4,speed:4,multi:4,open:1}},
-{id:"opus-4-6",company:"Anthropic",family:"Claude Opus",version:"Opus-4.6",initials:"O4",summary:{en:"Opus version focused on depth, polished language, and reliable step-by-step reasoning.",zh:"偏深度、文字质感和稳定分步推理的 Opus 版本。"},bestFor:{en:["Long context","Reasoning","Editing"],zh:["长上下文","推理","润色"]},metrics:{reason:5,write:5,code:4,speed:3,multi:4,open:1}},
-{id:"sonnet-4-5",company:"Anthropic",family:"Claude Sonnet",version:"Sonnet-4.5",initials:"S4",summary:{en:"Practical Claude version for speed, writing quality, coding help, and everyday business work.",zh:"实用型 Claude 版本，兼顾速度、写作质量、编程辅助和商务场景。"},bestFor:{en:["Business","Writing","Coding"],zh:["商务","写作","编程"]},metrics:{reason:4,write:5,code:4,speed:5,multi:4,open:1}},
-{id:"haiku-3-5",company:"Anthropic",family:"Claude Haiku",version:"Haiku-3.5",initials:"H3",summary:{en:"Fast Claude version suited to lightweight chat, classification, and simple content operations.",zh:"快速 Claude 版本，适合轻量聊天、分类和简单内容处理。"},bestFor:{en:["Speed","Classification","Short tasks"],zh:["速度","分类","短任务"]},metrics:{reason:3,write:4,code:3,speed:5,multi:3,open:1}},
-{id:"gemini-3-pro",company:"Google",family:"Gemini",version:"Gemini 3 Pro",initials:"G3",summary:{en:"Google model version for multimodal work, search-style assistance, and ecosystem-connected tasks.",zh:"Google 模型版本，适合多模态、搜索式辅助和生态联动任务。"},bestFor:{en:["Multimodal","Search","Google apps"],zh:["多模态","搜索","Google 应用"]},metrics:{reason:5,write:4,code:4,speed:5,multi:5,open:2}},
-{id:"gemini-2-5-pro",company:"Google",family:"Gemini",version:"Gemini 2.5 Pro",initials:"G2",summary:{en:"Balanced Gemini version for reasoning, image input, workspace use, and broad assistant tasks.",zh:"均衡 Gemini 版本，适合推理、图像输入、办公和通用助手任务。"},bestFor:{en:["Workspace","Vision","Reasoning"],zh:["办公","视觉","推理"]},metrics:{reason:4,write:4,code:4,speed:5,multi:5,open:2}},
-{id:"deepseek-r1",company:"DeepSeek",family:"DeepSeek",version:"DeepSeek-R1",initials:"R1",summary:{en:"Reasoning-oriented version for math, logic, code explanation, and structured problem solving.",zh:"偏推理的版本，适合数学、逻辑、代码解释和结构化解题。"},bestFor:{en:["Reasoning","Math","Code"],zh:["推理","数学","代码"]},metrics:{reason:5,write:4,code:5,speed:4,multi:2,open:4}},
-{id:"deepseek-v3",company:"DeepSeek",family:"DeepSeek",version:"DeepSeek-V3",initials:"V3",summary:{en:"General DeepSeek version with strong value for chat, writing, code, and fast technical workflows.",zh:"通用 DeepSeek 版本，适合聊天、写作、代码和快速技术工作流。"},bestFor:{en:["General use","Coding","Value"],zh:["通用","编程","性价比"]},metrics:{reason:4,write:4,code:5,speed:5,multi:2,open:4}},
-{id:"llama-4-maverick",company:"Meta",family:"Llama",version:"Llama 4 Maverick",initials:"L4",summary:{en:"Open model version for customization, local or hosted deployment, and product integration.",zh:"开放模型版本，适合定制、本地或托管部署以及产品集成。"},bestFor:{en:["Open source","Deployment","Customization"],zh:["开源","部署","定制"]},metrics:{reason:4,write:4,code:4,speed:4,multi:4,open:5}},
-{id:"llama-3-3-70b",company:"Meta",family:"Llama",version:"Llama 3.3 70B",initials:"70",summary:{en:"Widely deployable open model version for teams that need control over hosting and tuning.",zh:"易部署的开放模型版本，适合需要掌控托管和调优的团队。"},bestFor:{en:["Self-hosting","Tuning","Control"],zh:["自托管","调优","控制"]},metrics:{reason:4,write:4,code:4,speed:4,multi:2,open:5}},
-{id:"qwen-3-max",company:"Alibaba",family:"Qwen",version:"Qwen3 Max",initials:"Q3",summary:{en:"Large Qwen version with strong multilingual and Chinese capability for business and content tasks.",zh:"大型 Qwen 版本，多语言和中文能力强，适合商务和内容任务。"},bestFor:{en:["Chinese","Business","Writing"],zh:["中文","商务","写作"]},metrics:{reason:5,write:5,code:4,speed:4,multi:4,open:4}},
-{id:"qwen-3-coder",company:"Alibaba",family:"Qwen",version:"Qwen3 Coder",initials:"QC",summary:{en:"Coding-focused Qwen version for code generation, repair, and developer assistant workflows.",zh:"偏编程的 Qwen 版本，适合代码生成、修复和开发助手流程。"},bestFor:{en:["Coding","Repair","Agents"],zh:["编程","修复","智能体"]},metrics:{reason:4,write:3,code:5,speed:4,multi:3,open:4}},
-{id:"mistral-large",company:"Mistral AI",family:"Mistral",version:"Mistral Large",initials:"ML",summary:{en:"High-capability Mistral version for fast enterprise apps, European deployment needs, and developer workflows.",zh:"高能力 Mistral 版本，适合快速企业应用、欧洲部署需求和开发流程。"},bestFor:{en:["Enterprise","Speed","Developers"],zh:["企业","速度","开发者"]},metrics:{reason:4,write:4,code:4,speed:5,multi:3,open:3}},
-{id:"grok-4",company:"xAI",family:"Grok",version:"Grok 4",initials:"G4",summary:{en:"Conversation-first version connected to real-time social context, trends, and rapid exploration.",zh:"偏对话的版本，连接实时社交语境，适合趋势观察和快速探索。"},bestFor:{en:["Trends","Realtime","Conversation"],zh:["趋势","实时","对话"]},metrics:{reason:4,write:4,code:3,speed:4,multi:3,open:2}}
+{id:"gpt-5-5",company:"OpenAI",family:"GPT",version:"GPT-5.5",initials:"5.5",summary:{en:"Flagship GPT entry for complex reasoning, code review, multimodal analysis, and broad productivity work.",zh:"旗舰 GPT 条目，适合复杂推理、代码审查、多模态分析和通用生产力。"},bestFor:{en:["Reasoning","Coding","Daily work"],zh:["推理","编程","日常效率"]},basis:{en:"Editorial normalized estimate; compare with official vendor benchmarks before procurement.",zh:"编辑型标准化估计；采购前建议对照官方基准。"},metrics:{code:94.6,agent:92.4,vision:91.8,docs:91.5,context:92.0,instruct:93.1,efficiency:85.8,safety:86.4,open:22.0}},
+{id:"gpt-5-4-xhigh",company:"OpenAI",family:"GPT",version:"GPT-5.4 xhigh",initials:"5.4",summary:{en:"Higher-effort GPT profile aimed at difficult reasoning and review tasks, with extra latency tradeoff.",zh:"高推理强度 GPT 配置，适合困难推理和审查任务，但会牺牲一些延迟。"},bestFor:{en:["Hard reasoning","Code review","Deep analysis"],zh:["困难推理","代码审查","深度分析"]},basis:{en:"Included because Anthropic's Opus 4.7 article compares against GPT-5.4 in chart notes.",zh:"加入依据：Anthropic 的 Opus 4.7 文章脚注提到图表中对比 GPT-5.4。"},metrics:{code:92.2,agent:90.6,vision:90.4,docs:89.7,context:91.2,instruct:90.8,efficiency:80.6,safety:85.6,open:22.0}},
+{id:"gpt-5-4",company:"OpenAI",family:"GPT",version:"GPT-5.4",initials:"5.4",summary:{en:"Balanced GPT version for everyday assistant workflows with strong writing, coding, and multimodal coverage.",zh:"均衡 GPT 版本，覆盖日常助手、写作、编程和多模态工作流。"},bestFor:{en:["Assistant","Writing","Coding"],zh:["助手","写作","编程"]},basis:{en:"Editorial normalized estimate on a 100-point domain index.",zh:"100 分制任务域编辑指数。"},metrics:{code:90.8,agent:88.9,vision:89.5,docs:88.8,context:90.1,instruct:89.6,efficiency:84.3,safety:85.0,open:22.0}},
+{id:"gpt-5-3-codex",company:"OpenAI",family:"GPT",version:"GPT-5.3 Codex",initials:"CX",summary:{en:"Coding-focused GPT version for repository work, debugging, refactors, test repair, and implementation tasks.",zh:"偏编程的 GPT 版本，适合代码库工作、调试、重构、测试修复和实现任务。"},bestFor:{en:["Codebases","Debugging","Agents"],zh:["代码库","调试","智能体"]},basis:{en:"Coding-weighted editorial index.",zh:"偏代码场景加权的编辑指数。"},metrics:{code:91.7,agent:88.4,vision:82.0,docs:84.8,context:88.6,instruct:88.8,efficiency:86.2,safety:84.8,open:22.0}},
+{id:"gpt-4-1",company:"OpenAI",family:"GPT",version:"GPT-4.1",initials:"4.1",summary:{en:"General GPT version with broad compatibility for chat, writing, code, and structured tasks.",zh:"通用 GPT 版本，适合聊天、写作、代码和结构化任务。"},bestFor:{en:["General use","Compatibility","Writing"],zh:["通用","兼容","写作"]},basis:{en:"Legacy normalized baseline in this comparison set.",zh:"本对比集中的旧版标准化基线。"},metrics:{code:82.6,agent:78.2,vision:82.8,docs:81.0,context:80.6,instruct:82.3,efficiency:87.5,safety:84.0,open:22.0}},
+{id:"mythos-preview",company:"Anthropic",family:"Claude Mythos",version:"Mythos Preview",initials:"MY",summary:{en:"Anthropic describes Mythos Preview as more broadly capable than Opus 4.7, with limited release and stronger alignment results.",zh:"Anthropic 称 Mythos Preview 综合能力高于 Opus 4.7，当前更偏有限发布，并有更强对齐结果。"},bestFor:{en:["Frontier reasoning","Alignment","Research"],zh:["前沿推理","对齐","研究"]},basis:{en:"Based on Anthropic's Opus 4.7 article describing Mythos Preview as more broadly capable and best-aligned.",zh:"基于 Anthropic Opus 4.7 文章中对 Mythos Preview 综合能力和对齐表现的描述。"},metrics:{code:96.0,agent:95.5,vision:94.0,docs:94.2,context:95.0,instruct:93.8,efficiency:78.0,safety:94.5,open:10.0}},
+{id:"opus-4-7",company:"Anthropic",family:"Claude Opus",version:"Opus-4.7",initials:"O4",summary:{en:"Direct Opus 4.6 upgrade with stronger advanced software engineering, higher-resolution vision, better instruction following, and improved long-running task reliability.",zh:"Opus 4.6 的直接升级，在高级软件工程、高分辨率视觉、指令遵循和长程任务可靠性上提升明显。"},bestFor:{en:["Software engineering","Long-running agents","Documents"],zh:["软件工程","长程智能体","文档"]},basis:{en:"Anchored to Anthropic's article: CursorBench 70% vs 58%, visual acuity 98.5% vs 54.5%, Finance 0.813 vs 0.767, and Opus 4.7 pricing/API notes.",zh:"锚定 Anthropic 文章：CursorBench 70% 对 58%、视觉 98.5% 对 54.5%、Finance 0.813 对 0.767，以及 Opus 4.7 价格/API 说明。"},metrics:{code:93.8,agent:94.6,vision:98.5,docs:92.4,context:93.5,instruct:95.0,efficiency:90.2,safety:88.0,open:12.0}},
+{id:"opus-4-6",company:"Anthropic",family:"Claude Opus",version:"Opus-4.6",initials:"O4",summary:{en:"Previous Opus baseline with strong reasoning and writing, but weaker visual acuity and long-horizon agent performance than Opus 4.7.",zh:"上一代 Opus 基线，推理和写作仍强，但视觉细节和长程智能体能力弱于 Opus 4.7。"},bestFor:{en:["Long context","Reasoning","Editing"],zh:["长上下文","推理","润色"]},basis:{en:"Relative baseline from Anthropic's Opus 4.7 comparison notes.",zh:"来自 Anthropic Opus 4.7 对比说明的相对基线。"},metrics:{code:82.5,agent:83.0,vision:54.5,docs:86.8,context:88.0,instruct:86.5,efficiency:82.0,safety:86.8,open:12.0}},
+{id:"sonnet-4-6",company:"Anthropic",family:"Claude Sonnet",version:"Sonnet-4.6",initials:"S4",summary:{en:"Sonnet line version for practical coding, business writing, tool use, and lower-latency workflows.",zh:"Sonnet 系列版本，适合实际编程、商务写作、工具调用和低延迟工作流。"},bestFor:{en:["Business","Coding","Tool use"],zh:["商务","编程","工具调用"]},basis:{en:"Relative position included because Anthropic charts and notes mention Sonnet 4.6.",zh:"加入依据：Anthropic 图表和说明提到 Sonnet 4.6。"},metrics:{code:86.4,agent:84.2,vision:82.0,docs:84.6,context:86.0,instruct:87.4,efficiency:90.0,safety:86.0,open:12.0}},
+{id:"sonnet-4-5",company:"Anthropic",family:"Claude Sonnet",version:"Sonnet-4.5",initials:"S4",summary:{en:"Practical Claude version for speed, writing quality, coding help, and everyday business work.",zh:"实用型 Claude 版本，兼顾速度、写作质量、编程辅助和商务场景。"},bestFor:{en:["Business","Writing","Coding"],zh:["商务","写作","编程"]},basis:{en:"Editorial normalized estimate.",zh:"编辑型标准化估计。"},metrics:{code:84.8,agent:82.6,vision:80.5,docs:83.8,context:85.2,instruct:86.0,efficiency:90.8,safety:85.8,open:12.0}},
+{id:"haiku-3-5",company:"Anthropic",family:"Claude Haiku",version:"Haiku-3.5",initials:"H3",summary:{en:"Fast Claude version suited to lightweight chat, classification, and simple content operations.",zh:"快速 Claude 版本，适合轻量聊天、分类和简单内容处理。"},bestFor:{en:["Speed","Classification","Short tasks"],zh:["速度","分类","短任务"]},basis:{en:"Latency-weighted editorial index.",zh:"偏延迟场景加权的编辑指数。"},metrics:{code:68.0,agent:64.5,vision:70.0,docs:68.6,context:69.0,instruct:78.2,efficiency:96.0,safety:84.5,open:12.0}},
+{id:"gemini-3-1-pro",company:"Google",family:"Gemini",version:"Gemini 3.1 Pro",initials:"G3",summary:{en:"Gemini Pro entry for multimodal reasoning, search-style work, and Google ecosystem workflows.",zh:"Gemini Pro 条目，适合多模态推理、搜索式任务和 Google 生态工作流。"},bestFor:{en:["Multimodal","Search","Google apps"],zh:["多模态","搜索","Google 应用"]},basis:{en:"Included because Anthropic's Opus 4.7 article chart notes compare against Gemini 3.1 Pro.",zh:"加入依据：Anthropic Opus 4.7 文章图表脚注提到对比 Gemini 3.1 Pro。"},metrics:{code:88.8,agent:86.2,vision:94.0,docs:88.4,context:90.6,instruct:86.8,efficiency:86.5,safety:84.0,open:20.0}},
+{id:"gemini-3-pro",company:"Google",family:"Gemini",version:"Gemini 3 Pro",initials:"G3",summary:{en:"Google model version for multimodal work, search-style assistance, and ecosystem-connected tasks.",zh:"Google 模型版本，适合多模态、搜索式辅助和生态联动任务。"},bestFor:{en:["Multimodal","Search","Google apps"],zh:["多模态","搜索","Google 应用"]},basis:{en:"Editorial normalized estimate.",zh:"编辑型标准化估计。"},metrics:{code:87.6,agent:84.8,vision:92.8,docs:87.5,context:89.2,instruct:85.6,efficiency:87.2,safety:83.8,open:20.0}},
+{id:"gemini-2-5-pro",company:"Google",family:"Gemini",version:"Gemini 2.5 Pro",initials:"G2",summary:{en:"Balanced Gemini version for reasoning, image input, workspace use, and broad assistant tasks.",zh:"均衡 Gemini 版本，适合推理、图像输入、办公和通用助手任务。"},bestFor:{en:["Workspace","Vision","Reasoning"],zh:["办公","视觉","推理"]},basis:{en:"Previous-generation normalized baseline.",zh:"上一代标准化基线。"},metrics:{code:82.4,agent:78.8,vision:89.2,docs:83.2,context:84.0,instruct:82.8,efficiency:88.0,safety:83.0,open:20.0}},
+{id:"deepseek-r1",company:"DeepSeek",family:"DeepSeek",version:"DeepSeek-R1",initials:"R1",summary:{en:"Reasoning-oriented version for math, logic, code explanation, and structured problem solving.",zh:"偏推理的版本，适合数学、逻辑、代码解释和结构化解题。"},bestFor:{en:["Reasoning","Math","Code"],zh:["推理","数学","代码"]},basis:{en:"Reasoning and code weighted open-model index.",zh:"偏推理和代码场景的开放模型指数。"},metrics:{code:88.6,agent:82.0,vision:45.0,docs:78.5,context:82.8,instruct:81.2,efficiency:88.5,safety:78.0,open:82.0}},
+{id:"deepseek-v3-2",company:"DeepSeek",family:"DeepSeek",version:"DeepSeek-V3.2",initials:"V3",summary:{en:"General DeepSeek version for chat, writing, code, and fast technical workflows.",zh:"通用 DeepSeek 版本，适合聊天、写作、代码和快速技术工作流。"},bestFor:{en:["General use","Coding","Value"],zh:["通用","编程","性价比"]},basis:{en:"Editorial normalized estimate.",zh:"编辑型标准化估计。"},metrics:{code:86.8,agent:79.5,vision:46.0,docs:77.2,context:80.4,instruct:80.5,efficiency:91.0,safety:77.5,open:82.0}},
+{id:"llama-4-maverick",company:"Meta",family:"Llama",version:"Llama 4 Maverick",initials:"L4",summary:{en:"Open model version for customization, local or hosted deployment, and product integration.",zh:"开放模型版本，适合定制、本地或托管部署以及产品集成。"},bestFor:{en:["Open source","Deployment","Customization"],zh:["开源","部署","定制"]},basis:{en:"Open-deployment weighted editorial index.",zh:"偏开放部署场景加权的编辑指数。"},metrics:{code:82.6,agent:76.4,vision:79.0,docs:76.8,context:78.2,instruct:78.0,efficiency:86.0,safety:77.0,open:96.0}},
+{id:"llama-3-3-70b",company:"Meta",family:"Llama",version:"Llama 3.3 70B",initials:"70",summary:{en:"Widely deployable open model version for teams that need control over hosting and tuning.",zh:"易部署的开放模型版本，适合需要掌控托管和调优的团队。"},bestFor:{en:["Self-hosting","Tuning","Control"],zh:["自托管","调优","控制"]},basis:{en:"Open deployment baseline.",zh:"开放部署基线。"},metrics:{code:76.8,agent:70.5,vision:42.0,docs:72.0,context:74.0,instruct:74.5,efficiency:88.5,safety:76.0,open:96.0}},
+{id:"qwen-3-max",company:"Alibaba",family:"Qwen",version:"Qwen3 Max",initials:"Q3",summary:{en:"Large Qwen version with strong multilingual and Chinese capability for business and content tasks.",zh:"大型 Qwen 版本，多语言和中文能力强，适合商务和内容任务。"},bestFor:{en:["Chinese","Business","Writing"],zh:["中文","商务","写作"]},basis:{en:"Multilingual and business-work weighted editorial index.",zh:"偏多语言和商务任务的编辑指数。"},metrics:{code:85.2,agent:80.8,vision:82.0,docs:85.0,context:86.5,instruct:83.8,efficiency:87.4,safety:78.8,open:78.0}},
+{id:"qwen-3-coder",company:"Alibaba",family:"Qwen",version:"Qwen3 Coder",initials:"QC",summary:{en:"Coding-focused Qwen version for code generation, repair, and developer assistant workflows.",zh:"偏编程的 Qwen 版本，适合代码生成、修复和开发助手流程。"},bestFor:{en:["Coding","Repair","Agents"],zh:["编程","修复","智能体"]},basis:{en:"Coding-weighted open-model index.",zh:"偏代码场景加权的开放模型指数。"},metrics:{code:88.0,agent:81.6,vision:66.0,docs:76.0,context:82.0,instruct:81.5,efficiency:88.0,safety:78.0,open:78.0}},
+{id:"mistral-large",company:"Mistral AI",family:"Mistral",version:"Mistral Large",initials:"ML",summary:{en:"High-capability Mistral version for fast enterprise apps, European deployment needs, and developer workflows.",zh:"高能力 Mistral 版本，适合快速企业应用、欧洲部署需求和开发流程。"},bestFor:{en:["Enterprise","Speed","Developers"],zh:["企业","速度","开发者"]},basis:{en:"Enterprise and latency weighted editorial index.",zh:"偏企业和延迟场景的编辑指数。"},metrics:{code:83.8,agent:78.4,vision:70.0,docs:78.8,context:80.5,instruct:81.8,efficiency:89.5,safety:80.0,open:65.0}},
+{id:"mistral-small",company:"Mistral AI",family:"Mistral",version:"Mistral Small",initials:"MS",summary:{en:"Compact Mistral version for fast, economical chat and routing workloads.",zh:"紧凑型 Mistral 版本，适合快速、经济的聊天和路由工作负载。"},bestFor:{en:["Speed","Routing","Cost"],zh:["速度","路由","成本"]},basis:{en:"Efficiency-weighted editorial index.",zh:"偏效率的编辑指数。"},metrics:{code:68.5,agent:62.0,vision:58.0,docs:66.5,context:67.0,instruct:72.0,efficiency:94.0,safety:78.0,open:70.0}},
+{id:"grok-4",company:"xAI",family:"Grok",version:"Grok 4",initials:"G4",summary:{en:"Conversation-first version connected to real-time social context, trends, and rapid exploration.",zh:"偏对话的版本，连接实时社交语境，适合趋势观察和快速探索。"},bestFor:{en:["Trends","Realtime","Conversation"],zh:["趋势","实时","对话"]},basis:{en:"Realtime conversation weighted editorial index.",zh:"偏实时对话场景的编辑指数。"},metrics:{code:80.0,agent:76.5,vision:78.0,docs:75.4,context:78.5,instruct:77.6,efficiency:82.0,safety:76.0,open:20.0}},
+{id:"grok-3",company:"xAI",family:"Grok",version:"Grok 3",initials:"G3",summary:{en:"Previous Grok version for social-context chat, brainstorming, and fast exploration.",zh:"上一代 Grok 版本，适合社交语境聊天、头脑风暴和快速探索。"},bestFor:{en:["Conversation","Trends","Brainstorming"],zh:["对话","趋势","头脑风暴"]},basis:{en:"Previous-generation normalized baseline.",zh:"上一代标准化基线。"},metrics:{code:73.0,agent:69.0,vision:70.0,docs:70.2,context:72.0,instruct:72.6,efficiency:84.0,safety:74.0,open:20.0}}
 ]
 
-const metricIconClass={reason:"reason",write:"write",code:"code",speed:"speed",multi:"multi",open:"open"}
+const metricIconClass={code:"code",agent:"reason",vision:"multi",docs:"write",context:"reason",instruct:"write",efficiency:"speed",safety:"reason",open:"open"}
 
 function escapeHtml(value){
 return String(value).replace(/[&<>"']/g,character=>({
@@ -1134,10 +1155,11 @@ return `
 <span class="metric-icon ${iconClass}" aria-hidden="true"></span>
 <span class="metric-label">${escapeHtml(t.metrics[metricKey])}</span>
 <span class="metric-track"><span class="metric-fill" style="--value:${value}"></span></span>
-<span class="metric-score">${value}/5</span>
+<span class="metric-score">${value.toFixed(1)}</span>
 </div>
 `
 }).join("")
+let basis=model.basis[currentLang] || model.basis.en
 
 return `
 <article class="model-card">
@@ -1151,6 +1173,7 @@ return `
 <p class="model-note">${escapeHtml(summary)}</p>
 <div class="tags" aria-label="${escapeHtml(t.bestFor)}">${tags}</div>
 <div class="metrics">${metrics}</div>
+<p class="source-note"><strong>${escapeHtml(t.sourceLabel)}:</strong> ${escapeHtml(basis)}</p>
 </article>
 `
 }
@@ -1169,7 +1192,7 @@ return `
 <strong>${escapeHtml(model.version)}</strong>
 <span>${escapeHtml(summary)}</span>
 </div>
-<span class="score-badge">${average}/5</span>
+<span class="score-badge">${average}</span>
 </div>
 `
 }).join("")
