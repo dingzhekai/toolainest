@@ -429,6 +429,9 @@ font-family:var(--font-serif);
 font-size:20px;
 font-weight:500;
 margin:0 0 4px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
 }
 
 .price-id{
@@ -847,7 +850,7 @@ let rows=[
 {label:labels.cache1h,value:model.pricing.cacheWrite1h},
 {label:labels.search,value:model.pricing.webSearch}
 ].filter(row=>row.value!==null && row.value!==undefined).map(row=>{
-let width=row.value ? Math.max((row.value/maxPrice)*100,3) : 0
+let width=row.value ? Math.max((Math.sqrt(row.value)/Math.sqrt(maxPrice))*100,3) : 0
 return `
 <div class="price-row">
 <span class="price-row-label">${escapeHtml(row.label)}</span>
