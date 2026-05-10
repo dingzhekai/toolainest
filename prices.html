@@ -421,6 +421,12 @@ display:flex;
 gap:12px;
 justify-content:space-between;
 margin-bottom:12px;
+min-width:0;
+}
+
+.price-card-top>div:first-child{
+min-width:0;
+flex:1;
 }
 
 .price-card h3{
@@ -452,6 +458,7 @@ font-size:13px;
 font-weight:800;
 padding:9px 10px;
 white-space:nowrap;
+flex-shrink:0;
 }
 
 .price-meta{
@@ -850,7 +857,7 @@ let rows=[
 {label:labels.cache1h,value:model.pricing.cacheWrite1h},
 {label:labels.search,value:model.pricing.webSearch}
 ].filter(row=>row.value!==null && row.value!==undefined).map(row=>{
-let width=row.value ? Math.max((Math.sqrt(row.value)/Math.sqrt(maxPrice))*100,3) : 0
+let width=row.value ? Math.max((Math.log(row.value+1)/Math.log(maxPrice+1))*100,3) : 0
 return `
 <div class="price-row">
 <span class="price-row-label">${escapeHtml(row.label)}</span>
