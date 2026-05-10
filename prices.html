@@ -137,6 +137,21 @@ box-shadow:0 10px 30px var(--shadow-soft);
 position:sticky;
 top:0;
 z-index:10;
+transition:padding 0.3s ease,box-shadow 0.3s ease;
+}
+
+.nav--compact{
+padding:10px 40px;
+box-shadow:0 4px 16px var(--shadow-soft);
+}
+
+.nav--compact .logo{
+font-size:18px;
+transition:font-size 0.3s ease;
+}
+
+.nav--compact .nav-badge{
+display:none;
 }
 
 .nav-left,
@@ -606,7 +621,7 @@ grid-template-columns:minmax(78px,0.58fr) minmax(82px,1fr) 64px;
 
 <body>
 
-<div class="nav">
+<div class="nav" id="main_nav">
 <div class="nav-left">
 <div class="logo">AI Tools</div>
 <span class="nav-badge" id="nav_badge"></span>
@@ -903,6 +918,13 @@ document.getElementById("price_grid").innerHTML=`<div class="price-empty">${esca
 
 updateText()
 loadPrices()
+
+;(function(){
+let nav=document.getElementById("main_nav")
+window.addEventListener("scroll",function(){
+nav.classList.toggle("nav--compact",window.scrollY>60)
+},{passive:true})
+})()
 </script>
 
 </body>
