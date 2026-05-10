@@ -228,7 +228,7 @@ align-items:center;
 display:flex;
 gap:24px;
 justify-content:space-between;
-padding:20px 40px;
+padding:14px 40px;
 background:var(--surface-nav);
 backdrop-filter:blur(22px);
 border-bottom:1px solid var(--border-light);
@@ -236,6 +236,30 @@ box-shadow:0 10px 30px var(--shadow-soft);
 position:sticky;
 top:0;
 z-index:10;
+transition:padding 0.35s cubic-bezier(.4,0,.2,1),
+           max-width 0.35s cubic-bezier(.4,0,.2,1),
+           border-radius 0.35s cubic-bezier(.4,0,.2,1),
+           top 0.35s cubic-bezier(.4,0,.2,1),
+           margin 0.35s cubic-bezier(.4,0,.2,1),
+           box-shadow 0.35s cubic-bezier(.4,0,.2,1),
+           border 0.35s cubic-bezier(.4,0,.2,1);
+max-width:100%;
+margin:0 auto;
+border-radius:0;
+}
+
+.nav--compact{
+padding:10px 24px;
+max-width:860px;
+margin:10px auto 0;
+border-radius:999px;
+top:0;
+box-shadow:0 8px 32px var(--shadow-soft);
+border:1px solid var(--border-light);
+}
+
+.nav--compact .nav-badge{
+display:none;
 }
 
 .nav-left{
@@ -1114,7 +1138,7 @@ grid-template-columns:30px minmax(76px,0.58fr) minmax(80px,1fr) 28px;
 </div>
 
 <!-- NAV -->
-<div class="nav">
+<div class="nav" id="main_nav">
 <div class="nav-left">
 <div class="logo">AI Tools</div>
 <span class="nav-badge" id="nav_count"></span>
@@ -1422,6 +1446,13 @@ let filtered=allTools.filter(tool =>
 
 displayTools(filtered)
 }
+
+;(function(){
+let nav=document.getElementById("main_nav")
+window.addEventListener("scroll",function(){
+nav.classList.toggle("nav--compact",window.scrollY>60)
+},{passive:true})
+})()
 
 </script>
 
