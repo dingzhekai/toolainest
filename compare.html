@@ -757,6 +757,148 @@ line-height:1.45;
 margin:14px 0 0;
 }
 
+.price-section{
+margin-top:24px;
+}
+
+.price-panel{
+background:var(--surface-nav);
+backdrop-filter:blur(20px);
+border:1px solid var(--border-light);
+border-radius:18px;
+box-shadow:0 18px 44px var(--shadow-soft);
+padding:20px;
+}
+
+.price-controls{
+display:grid;
+grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+gap:12px;
+margin-top:16px;
+max-width:560px;
+}
+
+.price-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:16px;
+margin-top:18px;
+}
+
+.price-card{
+background:var(--surface-card);
+border:1px solid var(--border-light);
+border-radius:16px;
+box-shadow:0 12px 28px var(--shadow-soft);
+padding:16px;
+min-width:0;
+}
+
+.price-card-top{
+align-items:flex-start;
+display:flex;
+gap:12px;
+justify-content:space-between;
+margin-bottom:12px;
+}
+
+.price-card h3{
+color:var(--text-heading);
+font-family:var(--font-serif);
+font-size:20px;
+font-weight:500;
+margin:0 0 4px;
+}
+
+.price-id{
+color:var(--text-muted);
+display:block;
+font-size:12px;
+line-height:1.35;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.price-cost{
+background:var(--active-bg);
+border-radius:12px;
+color:var(--active-text);
+font-size:13px;
+font-weight:800;
+padding:9px 10px;
+white-space:nowrap;
+}
+
+.price-meta{
+display:flex;
+flex-wrap:wrap;
+gap:7px;
+margin-bottom:13px;
+}
+
+.price-meta span{
+background:var(--surface-soft);
+border:1px solid var(--border-control);
+border-radius:999px;
+color:var(--text-secondary);
+font-size:12px;
+font-weight:600;
+padding:6px 8px;
+}
+
+.price-bars{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.price-row{
+display:grid;
+grid-template-columns:minmax(74px,0.58fr) minmax(90px,1fr) 64px;
+gap:10px;
+align-items:center;
+}
+
+.price-row-label{
+color:var(--text-secondary);
+font-size:12px;
+font-weight:700;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.price-track{
+background:var(--surface-soft);
+border-radius:999px;
+height:9px;
+overflow:hidden;
+}
+
+.price-fill{
+background:linear-gradient(90deg,#34c759,#ff9f0a);
+border-radius:999px;
+display:block;
+height:100%;
+width:calc(var(--value) * 1%);
+}
+
+.price-value{
+color:var(--text-muted);
+font-size:12px;
+font-weight:800;
+text-align:right;
+}
+
+.price-empty{
+background:var(--surface-card);
+border:1px solid var(--border-light);
+border-radius:16px;
+color:var(--text-secondary);
+padding:18px;
+}
+
 footer{
 text-align:center;
 padding:34px 20px 42px;
@@ -836,6 +978,15 @@ flex-direction:column;
 min-width:0;
 width:100%;
 }
+
+.price-controls{
+grid-template-columns:1fr;
+max-width:none;
+}
+
+.price-row{
+grid-template-columns:minmax(72px,0.58fr) minmax(82px,1fr) 58px;
+}
 }
 
 </style>
@@ -895,6 +1046,33 @@ width:100%;
 </div>
 </div>
 <div class="compare-output" id="compare_output"></div>
+</section>
+
+<section class="price-section" id="token-prices">
+<div class="price-panel">
+<div class="catalog-head">
+<div>
+<h2 class="catalog-title" id="price_title"></h2>
+<p class="catalog-subtitle" id="price_subtitle"></p>
+</div>
+</div>
+<div class="price-controls">
+<div class="compare-field">
+<label for="price_provider" id="price_provider_label"></label>
+<div class="select-wrap">
+<select id="price_provider" onchange="renderPriceSection()"></select>
+</div>
+</div>
+<div class="compare-field">
+<label for="price_workload" id="price_workload_label"></label>
+<div class="select-wrap">
+<select id="price_workload" onchange="renderPriceSection()"></select>
+</div>
+</div>
+</div>
+<div class="price-grid" id="price_grid"></div>
+<p class="source-note" id="price_source"></p>
+</div>
 </section>
 
 <section class="catalog">
@@ -970,7 +1148,13 @@ right:"Compare side B",
 versus:"VS",
 catalogTitle:"Version catalog",
 catalogSubtitle:"Browse representative versions under each company. The 100-point domain scores are normalized editorial indices inspired by benchmark categories such as coding, vision, document reasoning, long-context work, and token efficiency.",
+priceTitle:"Token price lens",
+priceSubtitle:"A cost-focused section inspired by OfoxAI model cards: input, output, cached-read price, context window, max output, and a sample workload cost.",
+priceProvider:"Provider",
+priceWorkload:"Sample workload",
+priceSource:"Prices are USD per 1M tokens, adapted from the public OfoxAI model catalog and Models API fields. Check the provider page before production use because pricing can change.",
 allCompanies:"All companies",
+allProviders:"All providers",
 bestFor:"Best for",
 sourceLabel:"Basis",
 footer:"© 2026 AI Tools Directory",
@@ -990,6 +1174,21 @@ instruct:"Instruction following",
 efficiency:"Token efficiency",
 safety:"Safety alignment",
 open:"Open deployment"
+},
+priceLabels:{
+input:"Input",
+output:"Output",
+cached:"Cached read",
+context:"Context",
+maxOutput:"Max output",
+example:"Example",
+loading:"Loading price data...",
+perMillion:"/M"
+},
+workloads:{
+chat:"Chat: 1M input + 250K output",
+agent:"Agent: 3M input + 1M cached + 800K output",
+coding:"Coding: 2M input + 500K cached + 1M output"
 }
 },
 zh:{
@@ -1006,7 +1205,13 @@ right:"对比方 B",
 versus:"VS",
 catalogTitle:"版本目录",
 catalogSubtitle:"按公司展示代表性版本。100 分制任务域分数是标准化编辑指数，参考编码、视觉、文档推理、长上下文和 Token 效率等基准分类。",
+priceTitle:"Token 价格视图",
+priceSubtitle:"参考 OfoxAI 模型卡片的呈现方式，集中展示输入、输出、缓存读取价格、上下文、最大输出和示例任务成本。",
+priceProvider:"供应商",
+priceWorkload:"示例工作量",
+priceSource:"价格单位为美元 / 100 万 tokens，整理自 OfoxAI 公开模型广场和 Models API 字段。价格可能变化，生产使用前请再核对供应商页面。",
 allCompanies:"全部公司",
+allProviders:"全部供应商",
 bestFor:"适合",
 sourceLabel:"依据",
 footer:"© 2026 AI工具导航",
@@ -1026,6 +1231,21 @@ instruct:"指令遵循",
 efficiency:"Token 效率",
 safety:"安全对齐",
 open:"开放部署"
+},
+priceLabels:{
+input:"输入",
+output:"输出",
+cached:"缓存读取",
+context:"上下文",
+maxOutput:"最大输出",
+example:"示例",
+loading:"正在加载价格数据...",
+perMillion:"/M"
+},
+workloads:{
+chat:"聊天：100万输入 + 25万输出",
+agent:"智能体：300万输入 + 100万缓存 + 80万输出",
+coding:"编程：200万输入 + 50万缓存 + 100万输出"
 }
 }
 }
@@ -1059,6 +1279,14 @@ const models=[
 
 const metricIconClass={code:"code",agent:"reason",vision:"multi",docs:"write",context:"reason",instruct:"write",efficiency:"speed",safety:"reason",open:"open"}
 
+let priceModels=[]
+
+const priceWorkloadTokens={
+chat:{input:1000000,cached:0,output:250000},
+agent:{input:3000000,cached:1000000,output:800000},
+coding:{input:2000000,cached:500000,output:1000000}
+}
+
 function escapeHtml(value){
 return String(value).replace(/[&<>"']/g,character=>({
 "&":"&amp;",
@@ -1091,6 +1319,11 @@ document.getElementById("theme_dark").innerText=t.theme.dark
 document.getElementById("left_label").innerText=t.left
 document.getElementById("right_label").innerText=t.right
 document.getElementById("versus").innerText=t.versus
+document.getElementById("price_title").innerText=t.priceTitle
+document.getElementById("price_subtitle").innerText=t.priceSubtitle
+document.getElementById("price_provider_label").innerText=t.priceProvider
+document.getElementById("price_workload_label").innerText=t.priceWorkload
+document.getElementById("price_source").innerText=t.priceSource
 document.getElementById("catalog_title").innerText=t.catalogTitle
 document.getElementById("catalog_subtitle").innerText=t.catalogSubtitle
 document.getElementById("footer").innerText=t.footer
@@ -1098,8 +1331,10 @@ document.getElementById("lang_switch").className="lang-switch " + currentLang
 updateThemeSwitch()
 renderSelectors()
 renderCompanyFilter()
+renderPriceControls()
 renderComparison()
 renderCatalog()
+renderPriceSection()
 }
 
 function renderSelectors(){
@@ -1126,6 +1361,93 @@ let currentValue=select.value || "All"
 let companies=[...new Set(models.map(model=>model.company))]
 select.innerHTML=`<option value="All">${escapeHtml(text[currentLang].allCompanies)}</option>` + companies.map(company=>`<option value="${escapeHtml(company)}">${escapeHtml(company)}</option>`).join("")
 select.value=companies.includes(currentValue) ? currentValue : "All"
+}
+
+function renderPriceControls(){
+let providerSelect=document.getElementById("price_provider")
+let workloadSelect=document.getElementById("price_workload")
+let providerValue=providerSelect.value || "All"
+let workloadValue=workloadSelect.value || "chat"
+let providers=[...new Set(priceModels.map(model=>model.provider))]
+
+providerSelect.innerHTML=`<option value="All">${escapeHtml(text[currentLang].allProviders)}</option>` + providers.map(provider=>`<option value="${escapeHtml(provider)}">${escapeHtml(provider)}</option>`).join("")
+providerSelect.value=providers.includes(providerValue) ? providerValue : "All"
+
+workloadSelect.innerHTML=Object.keys(priceWorkloadTokens).map(key=>`<option value="${escapeHtml(key)}">${escapeHtml(text[currentLang].workloads[key])}</option>`).join("")
+workloadSelect.value=priceWorkloadTokens[workloadValue] ? workloadValue : "chat"
+}
+
+function formatMoney(value){
+if(value===null || value===undefined){
+return "-"
+}
+if(value===0){
+return "$0"
+}
+let decimals=value < 0.01 ? 4 : (value < 1 ? 3 : 2)
+return "$" + Number(value).toFixed(decimals).replace(/0+$/,"").replace(/\.$/,"")
+}
+
+function getWorkloadCost(model, workloadKey){
+let workload=priceWorkloadTokens[workloadKey] || priceWorkloadTokens.chat
+let cachedPrice=model.pricing.cachedInput ?? model.pricing.input
+return (workload.input/1000000*model.pricing.input) + (workload.cached/1000000*cachedPrice) + (workload.output/1000000*model.pricing.output)
+}
+
+function renderPriceSection(){
+let t=text[currentLang]
+let grid=document.getElementById("price_grid")
+if(!priceModels.length){
+grid.innerHTML=`<div class="price-empty">${escapeHtml(t.priceLabels.loading)}</div>`
+return
+}
+
+let provider=document.getElementById("price_provider").value || "All"
+let workloadKey=document.getElementById("price_workload").value || "chat"
+let visibleModels=priceModels.filter(model=>provider==="All" || model.provider===provider)
+let maxPrice=Math.max(...visibleModels.flatMap(model=>[model.pricing.input,model.pricing.output,model.pricing.cachedInput || 0]),1)
+
+visibleModels.sort((a,b)=>getWorkloadCost(a,workloadKey)-getWorkloadCost(b,workloadKey))
+grid.innerHTML=visibleModels.map(model=>renderPriceCard(model,workloadKey,maxPrice)).join("")
+}
+
+function renderPriceCard(model, workloadKey, maxPrice){
+let labels=text[currentLang].priceLabels
+let cost=getWorkloadCost(model,workloadKey)
+let cached=model.pricing.cachedInput
+let rows=[
+{label:labels.input,value:model.pricing.input},
+{label:labels.output,value:model.pricing.output},
+{label:labels.cached,value:cached}
+].map(row=>{
+let width=row.value ? Math.max((row.value/maxPrice)*100,3) : 0
+return `
+<div class="price-row">
+<span class="price-row-label">${escapeHtml(row.label)}</span>
+<span class="price-track"><span class="price-fill" style="--value:${width}"></span></span>
+<span class="price-value">${escapeHtml(formatMoney(row.value))}</span>
+</div>
+`
+}).join("")
+
+return `
+<article class="price-card">
+<div class="price-card-top">
+<div>
+<h3>${escapeHtml(model.name)}</h3>
+<span class="price-id">${escapeHtml(model.id)}</span>
+</div>
+<div class="price-cost">${escapeHtml(formatMoney(cost))}</div>
+</div>
+<div class="price-meta">
+<span>${escapeHtml(model.provider)}</span>
+<span>${escapeHtml(labels.context)} ${escapeHtml(model.context)}</span>
+<span>${escapeHtml(labels.maxOutput)} ${escapeHtml(model.maxOutput)}</span>
+</div>
+<div class="price-bars">${rows}</div>
+<p class="source-note"><strong>${escapeHtml(labels.example)}:</strong> ${escapeHtml(text[currentLang].workloads[workloadKey])}</p>
+</article>
+`
 }
 
 function getModel(id){
@@ -1206,7 +1528,21 @@ return `
 document.getElementById("catalog_grid").innerHTML=cards
 }
 
+function loadPriceModels(){
+fetch("data/model-prices.json")
+.then(response=>response.json())
+.then(data=>{
+priceModels=data.models || []
+renderPriceControls()
+renderPriceSection()
+})
+.catch(()=>{
+document.getElementById("price_grid").innerHTML=`<div class="price-empty">${escapeHtml(text[currentLang].priceLabels.loading)}</div>`
+})
+}
+
 updateText()
+loadPriceModels()
 </script>
 
 </body>
