@@ -1122,7 +1122,7 @@ grid-template-columns:30px minmax(76px,0.58fr) minmax(80px,1fr) 28px;
 
 <nav class="nav-links" aria-label="Primary navigation">
 <a href="#tools" id="nav_browse"></a>
-<a href="#compare" id="nav_compare"></a>
+<a href="/compare.html" id="nav_compare"></a>
 <a href="#category_title" id="nav_categories"></a>
 <a href="/about.html" id="nav_about"></a>
 <a href="/contact.html" id="nav_contact"></a>
@@ -1174,34 +1174,6 @@ data-full-width-responsive="true"></ins>
 <input id="search" oninput="searchTools()" />
 </div>
 
-<!-- AI COMPARE -->
-<section class="compare-section" id="compare">
-<div class="compare-panel">
-<div class="compare-header">
-<div>
-<h2 class="compare-title" id="compare_title"></h2>
-<p class="compare-subtitle" id="compare_subtitle"></p>
-</div>
-<div class="compare-controls" aria-label="AI comparison controls">
-<div class="compare-field">
-<label for="compare_left" id="compare_left_label"></label>
-<div class="compare-field-inner">
-<select id="compare_left" onchange="renderComparison()"></select>
-</div>
-</div>
-<div class="compare-versus" id="compare_versus"></div>
-<div class="compare-field">
-<label for="compare_right" id="compare_right_label"></label>
-<div class="compare-field-inner">
-<select id="compare_right" onchange="renderComparison()"></select>
-</div>
-</div>
-</div>
-</div>
-<div class="compare-output" id="compare_output"></div>
-</div>
-</section>
-
 <div class="content-layout">
 
 <aside class="sidebar">
@@ -1218,6 +1190,7 @@ data-full-width-responsive="true"></ins>
 <div class="footer-links">
 
 <a href="/about.html">About</a> |
+<a href="/compare.html">Compare</a> |
 <a href="/privacy.html">Privacy</a> |
 <a href="/contact.html">Contact</a>
 
@@ -1297,22 +1270,6 @@ Video:"Video",
 Writing:"Writing",
 Coding:"Coding"
 },
-compare:{
-title:"Compare AI models",
-subtitle:"Pick two companies or models and see their strengths at a glance.",
-left:"Side A",
-right:"Side B",
-versus:"VS",
-bestFor:"Best for",
-metrics:{
-reason:"Reasoning",
-write:"Writing",
-code:"Coding",
-speed:"Speed",
-multi:"Multimodal",
-open:"Open"
-}
-},
 visit:"Visit",
 details:"Details",
 footer:"© 2026 AI Tools Directory"
@@ -1345,134 +1302,10 @@ Video:"视频",
 Writing:"写作",
 Coding:"编程"
 },
-compare:{
-title:"AI 公司与型号对比",
-subtitle:"自由选择两个 AI，公司、模型或产品都可以，下方用图标和能力条直观展示差异。",
-left:"对比方 A",
-right:"对比方 B",
-versus:"VS",
-bestFor:"适合",
-metrics:{
-reason:"推理",
-write:"写作",
-code:"编程",
-speed:"速度",
-multi:"多模态",
-open:"开放"
-}
-},
 visit:"访问",
 details:"详情",
 footer:"© 2026 AI工具导航"
 }
-}
-
-const compareModels=[
-{
-id:"chatgpt",
-name:"ChatGPT",
-company:"OpenAI",
-initials:"GPT",
-summary:{
-en:"A general-purpose assistant with strong reasoning, coding support, writing, image understanding, and broad workflow coverage.",
-zh:"通用型 AI 助手，推理、编程、写作、图像理解和日常工作流覆盖都很均衡。"
-},
-bestFor:{en:["Research","Coding","Daily work"],zh:["研究","编程","日常效率"]},
-metrics:{reason:5,write:5,code:5,speed:4,multi:5,open:2}
-},
-{
-id:"claude",
-name:"Claude",
-company:"Anthropic",
-initials:"CL",
-summary:{
-en:"Known for careful long-form writing, document analysis, planning, and polished conversational output.",
-zh:"擅长长文写作、文档分析、计划拆解和自然细腻的对话输出。"
-},
-bestFor:{en:["Writing","Analysis","Planning"],zh:["写作","分析","规划"]},
-metrics:{reason:5,write:5,code:4,speed:4,multi:4,open:1}
-},
-{
-id:"gemini",
-name:"Gemini",
-company:"Google",
-initials:"G",
-summary:{
-en:"Deeply connected to Google's ecosystem with strong multimodal abilities and practical search-style assistance.",
-zh:"和 Google 生态结合紧密，多模态能力强，也适合搜索、资料整理和办公场景。"
-},
-bestFor:{en:["Multimodal","Google apps","Search"],zh:["多模态","Google 应用","搜索"]},
-metrics:{reason:4,write:4,code:4,speed:5,multi:5,open:2}
-},
-{
-id:"deepseek",
-name:"DeepSeek",
-company:"DeepSeek",
-initials:"DS",
-summary:{
-en:"A reasoning and coding-focused model family with strong value for technical users and structured problem solving.",
-zh:"偏推理和编程的模型系列，对技术用户、数学推导和结构化解题很友好。"
-},
-bestFor:{en:["Reasoning","Coding","Math"],zh:["推理","编程","数学"]},
-metrics:{reason:5,write:4,code:5,speed:4,multi:2,open:4}
-},
-{
-id:"llama",
-name:"Llama",
-company:"Meta",
-initials:"LA",
-summary:{
-en:"A flexible open model family often used for custom deployments, local experiments, and product integration.",
-zh:"开放模型家族，常用于自定义部署、本地实验和产品集成。"
-},
-bestFor:{en:["Open source","Local use","Customization"],zh:["开源","本地使用","定制"]},
-metrics:{reason:4,write:4,code:4,speed:4,multi:3,open:5}
-},
-{
-id:"qwen",
-name:"Qwen",
-company:"Alibaba",
-initials:"QW",
-summary:{
-en:"A multilingual model family with strong Chinese capability, coding options, and open deployment choices.",
-zh:"多语言模型系列，中文能力强，也覆盖编程和开放部署选择。"
-},
-bestFor:{en:["Chinese","Coding","Open models"],zh:["中文","编程","开放模型"]},
-metrics:{reason:4,write:4,code:4,speed:4,multi:4,open:4}
-},
-{
-id:"mistral",
-name:"Mistral",
-company:"Mistral AI",
-initials:"MI",
-summary:{
-en:"A compact and efficient model family suited to fast apps, European deployments, and flexible developer workflows.",
-zh:"轻量高效的模型系列，适合快速应用、欧洲部署和灵活开发工作流。"
-},
-bestFor:{en:["Speed","Developers","Deployment"],zh:["速度","开发者","部署"]},
-metrics:{reason:4,write:4,code:4,speed:5,multi:3,open:4}
-},
-{
-id:"grok",
-name:"Grok",
-company:"xAI",
-initials:"GX",
-summary:{
-en:"A conversational model connected to real-time social context, useful for trends, commentary, and quick exploration.",
-zh:"偏实时社交语境的对话模型，适合趋势观察、观点整理和快速探索。"
-},
-bestFor:{en:["Trends","Conversation","Realtime context"],zh:["趋势","对话","实时语境"]},
-metrics:{reason:4,write:4,code:3,speed:4,multi:3,open:2}
-}
-]
-
-const metricIconClass={
-reason:"reason",
-write:"write",
-code:"code",
-speed:"speed",
-multi:"multi",
-open:"open"
 }
 
 function updateText(){
@@ -1492,91 +1325,9 @@ document.getElementById("nav_submit").innerText = t.nav.submit
 document.getElementById("nav_count").innerText = allTools.length + t.nav.countSuffix
 document.getElementById("theme_light").innerText = t.theme.light
 document.getElementById("theme_dark").innerText = t.theme.dark
-document.getElementById("compare_title").innerText = t.compare.title
-document.getElementById("compare_subtitle").innerText = t.compare.subtitle
-document.getElementById("compare_left_label").innerText = t.compare.left
-document.getElementById("compare_right_label").innerText = t.compare.right
-document.getElementById("compare_versus").innerText = t.compare.versus
 updateThemeSwitch()
-renderCompareSelectors()
-renderComparison()
 
 document.getElementById("footer").innerText = t.footer
-}
-
-function escapeHtml(value){
-return String(value).replace(/[&<>"']/g,character=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-"\"":"&quot;",
-"'":"&#39;"
-}[character]))
-}
-
-function renderCompareSelectors(){
-let leftSelect=document.getElementById("compare_left")
-let rightSelect=document.getElementById("compare_right")
-let leftValue=leftSelect.value || "chatgpt"
-let rightValue=rightSelect.value || "claude"
-let options=compareModels.map(model=>{
-let label=`${model.name} · ${model.company}`
-return `<option value="${escapeHtml(model.id)}">${escapeHtml(label)}</option>`
-}).join("")
-leftSelect.innerHTML=options
-rightSelect.innerHTML=options
-leftSelect.value=compareModels.some(model=>model.id===leftValue) ? leftValue : "chatgpt"
-rightSelect.value=compareModels.some(model=>model.id===rightValue) ? rightValue : "claude"
-}
-
-function getCompareModel(id){
-return compareModels.find(model=>model.id===id) || compareModels[0]
-}
-
-function renderComparison(){
-let leftSelect=document.getElementById("compare_left")
-let rightSelect=document.getElementById("compare_right")
-if(!leftSelect.options.length || !rightSelect.options.length){
-renderCompareSelectors()
-}
-
-let leftModel=getCompareModel(leftSelect.value)
-let rightModel=getCompareModel(rightSelect.value)
-let container=document.getElementById("compare_output")
-container.innerHTML=renderCompareCard(leftModel) + renderCompareCard(rightModel)
-}
-
-function renderCompareCard(model){
-let t=text[currentLang].compare
-let summary=model.summary[currentLang] || model.summary.en
-let tags=(model.bestFor[currentLang] || model.bestFor.en).map(tag=>`<span class="compare-tag">${escapeHtml(tag)}</span>`).join("")
-let metrics=Object.keys(t.metrics).map(metricKey=>{
-let value=model.metrics[metricKey] || 0
-let iconClass=metricIconClass[metricKey] || "reason"
-return `
-<div class="compare-metric">
-<span class="metric-icon ${iconClass}" aria-hidden="true"></span>
-<span class="metric-label">${escapeHtml(t.metrics[metricKey])}</span>
-<span class="metric-track"><span class="metric-fill" style="--value:${value}"></span></span>
-<span class="metric-score">${value}/5</span>
-</div>
-`
-}).join("")
-
-return `
-<article class="compare-card">
-<div class="compare-card-top">
-<div class="compare-logo">${escapeHtml(model.initials)}</div>
-<div>
-<h3>${escapeHtml(model.name)}</h3>
-<div class="compare-company">${escapeHtml(model.company)}</div>
-</div>
-</div>
-<p class="compare-note">${escapeHtml(summary)}</p>
-<div class="compare-tags" aria-label="${escapeHtml(t.bestFor)}">${tags}</div>
-<div class="compare-metrics">${metrics}</div>
-</article>
-`
 }
 
 let allTools=[]

@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Model Comparison | AI Tools Directory</title>
+
+<meta name="description" content="Compare AI companies, model families, and model versions including GPT, Claude, Gemini, DeepSeek, Llama, Qwen, Mistral, and Grok.">
+<meta name="keywords" content="AI model comparison, GPT comparison, Claude Opus comparison, Gemini comparison, AI model versions">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://toolainest.top/compare.html">
+
+<script>
+let savedTheme=null
+try{
+savedTheme=localStorage.getItem("theme")
+}catch(error){
+savedTheme=null
+}
+if(savedTheme!=="dark" && savedTheme!=="light"){
+savedTheme=null
+}
+let prefersDark=window.matchMedia("(prefers-color-scheme: dark)").matches
+document.documentElement.dataset.theme=savedTheme || (prefersDark ? "dark" : "light")
+</script>
+
+<style>
+
+:root{
+--font-sans:"Inter","Avenir Next","Helvetica Neue",Arial,sans-serif;
+--font-serif:Georgia,Cambria,"Times New Roman",serif;
+--scene-image:url("a.png");
+--leaf-color:rgba(75,132,62,0.78);
+--leaf-shadow:rgba(255,247,184,0.38);
+--page-base:#f4f5f9;
+--page-overlay:
+linear-gradient(180deg,rgba(251,251,253,0.64) 0%,rgba(244,245,249,0.78) 44%,rgba(238,241,246,0.9) 100%),
+linear-gradient(135deg,rgba(10,132,255,0.1),rgba(48,209,88,0.08) 34%,rgba(255,159,10,0.1) 72%);
+--text-primary:#1d1d1f;
+--text-strong:#111827;
+--text-heading:#161a22;
+--text-secondary:#5f6673;
+--text-muted:#69707d;
+--surface-nav:rgba(255,255,255,0.74);
+--surface-card:rgba(255,255,255,0.86);
+--surface-card-hover:white;
+--surface-soft:rgba(242,244,248,0.86);
+--surface-pill:rgba(232,235,241,0.78);
+--surface-pill-knob:rgba(255,255,255,0.96);
+--border-light:rgba(255,255,255,0.78);
+--border-control:rgba(210,214,222,0.78);
+--shadow-soft:rgba(24,39,75,0.08);
+--shadow-medium:rgba(24,39,75,0.13);
+--accent:#0071e3;
+--accent-hover:#004f9f;
+--active-bg:#111827;
+--active-text:white;
+color-scheme:light;
+}
+
+:root[data-theme="dark"]{
+--scene-image:url("b.png");
+--leaf-color:rgba(153,204,148,0.46);
+--leaf-shadow:rgba(122,183,255,0.28);
+--page-base:#0d1117;
+--page-overlay:
+linear-gradient(180deg,rgba(10,13,19,0.5) 0%,rgba(13,17,23,0.72) 46%,rgba(8,10,14,0.9) 100%),
+radial-gradient(circle at 18% 12%,rgba(0,113,227,0.2),rgba(0,0,0,0) 30%),
+radial-gradient(circle at 84% 18%,rgba(52,199,89,0.14),rgba(0,0,0,0) 28%);
+--text-primary:#f3f4f6;
+--text-strong:#f9fafb;
+--text-heading:#f7f1e8;
+--text-secondary:#b9c0cc;
+--text-muted:#a2aab8;
+--surface-nav:rgba(19,22,29,0.78);
+--surface-card:rgba(28,32,41,0.82);
+--surface-card-hover:rgba(35,40,51,0.94);
+--surface-soft:rgba(39,45,58,0.82);
+--surface-pill:rgba(39,45,58,0.78);
+--surface-pill-knob:rgba(246,241,232,0.96);
+--border-light:rgba(255,255,255,0.1);
+--border-control:rgba(255,255,255,0.14);
+--shadow-soft:rgba(0,0,0,0.26);
+--shadow-medium:rgba(0,0,0,0.36);
+--accent:#7ab7ff;
+--accent-hover:#b6d8ff;
+--active-bg:#f6f1e8;
+--active-text:#15171c;
+color-scheme:dark;
+}
+
+body{
+font-family:var(--font-sans);
+margin:0;
+background:var(--page-base);
+color:var(--text-primary);
+min-height:100vh;
+overflow-x:hidden;
+position:relative;
+transition:background 0.25s ease,color 0.25s ease;
+}
+
+body::before,
+body::after{
+content:"";
+inset:0;
+pointer-events:none;
+position:fixed;
+}
+
+body::before{
+background-image:var(--scene-image);
+background-position:center;
+background-size:cover;
+z-index:0;
+}
+
+body::after{
+background:var(--page-overlay);
+z-index:0;
+}
+
+body > *{
+position:relative;
+z-index:1;
+}
+
+.nav{
+align-items:center;
+display:flex;
+gap:24px;
+justify-content:space-between;
+padding:20px 40px;
+background:var(--surface-nav);
+backdrop-filter:blur(22px);
+border-bottom:1px solid var(--border-light);
+box-shadow:0 10px 30px var(--shadow-soft);
+position:sticky;
+top:0;
+z-index:10;
+}
+
+.nav-left{
+align-items:center;
+display:flex;
+gap:14px;
+min-width:0;
+}
+
+.logo{
+font-family:var(--font-serif);
+font-weight:600;
+font-size:20px;
+letter-spacing:0;
+color:var(--text-strong);
+}
+
+.nav-badge{
+background:var(--surface-soft);
+border:1px solid var(--border-control);
+border-radius:999px;
+color:var(--text-secondary);
+font-size:12px;
+font-weight:600;
+line-height:1;
+padding:7px 10px;
+white-space:nowrap;
+}
+
+.nav-links{
+align-items:center;
+display:flex;
+gap:6px;
+justify-content:center;
+min-width:0;
+}
+
+.nav-links a{
+border-radius:999px;
+color:var(--text-secondary);
+font-size:14px;
+font-weight:600;
+padding:9px 13px;
+text-decoration:none;
+transition:background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+white-space:nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+background:var(--surface-card-hover);
+box-shadow:0 8px 20px var(--shadow-soft);
+color:var(--text-strong);
+}
+
+.nav-actions{
+align-items:center;
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.submit-link{
+background:var(--active-bg);
+border-radius:999px;
+box-shadow:0 12px 26px var(--shadow-medium);
+color:var(--active-text);
+font-size:14px;
+font-weight:600;
+padding:11px 15px;
+text-decoration:none;
+transition:background 0.2s ease,box-shadow 0.2s ease,transform 0.2s ease;
+white-space:nowrap;
+}
+
+.theme-switch,
+.lang-switch{
+align-items:center;
+appearance:none;
+background:var(--surface-pill);
+border:1px solid var(--border-control);
+border-radius:999px;
+box-sizing:border-box;
+cursor:pointer;
+display:flex;
+font-size:13px;
+height:40px;
+line-height:1;
+overflow:hidden;
+padding:4px;
+position:relative;
+transition:box-shadow 0.2s ease,background 0.2s ease;
+}
+
+.theme-switch{
+width:118px;
+}
+
+.lang-switch{
+font-size:14px;
+width:124px;
+}
+
+.theme-switch:hover,
+.lang-switch:hover{
+box-shadow:0 10px 24px var(--shadow-soft);
+}
+
+.theme-switch-knob,
+.lang-switch-knob{
+background:var(--surface-pill-knob);
+border-radius:999px;
+box-shadow:0 6px 16px var(--shadow-soft);
+display:block;
+height:30px;
+left:4px;
+position:absolute;
+top:4px;
+transition:transform 0.32s cubic-bezier(0.22,1,0.36,1);
+z-index:0;
+}
+
+.theme-switch-knob{
+width:54px;
+}
+
+.lang-switch-knob{
+width:56px;
+}
+
+.theme-switch.dark .theme-switch-knob{
+transform:translateX(56px);
+}
+
+.lang-switch.zh .lang-switch-knob{
+transform:translateX(60px);
+}
+
+.theme-switch span:not(.theme-switch-knob),
+.lang-switch span:not(.lang-switch-knob){
+align-items:center;
+color:var(--text-secondary);
+display:flex;
+flex:1;
+font-weight:600;
+justify-content:center;
+position:relative;
+transition:color 0.22s ease;
+z-index:1;
+}
+
+.theme-switch.light .theme-light,
+.theme-switch.dark .theme-dark,
+.lang-switch.en .lang-en,
+.lang-switch.zh .lang-zh{
+color:var(--text-strong);
+}
+
+.hero{
+max-width:1100px;
+margin:0 auto;
+padding:72px 20px 30px;
+text-align:center;
+}
+
+.hero h1{
+font-family:var(--font-serif);
+font-size:52px;
+font-weight:500;
+letter-spacing:0;
+line-height:1.05;
+margin:0 0 12px;
+background:linear-gradient(90deg,#111827 0%,#0066cc 42%,#159b72 72%,#2d2d2f 100%);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+:root[data-theme="dark"] .hero h1{
+background:linear-gradient(90deg,#f7f1e8 0%,#7ab7ff 42%,#9fe3bd 72%,#f5dfc8 100%);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+.hero p{
+color:var(--text-secondary);
+font-size:18px;
+line-height:1.65;
+margin:0 auto;
+max-width:760px;
+}
+
+.page{
+max-width:1200px;
+margin:0 auto;
+padding:18px 20px 50px;
+}
+
+.compare-panel{
+background:var(--surface-nav);
+backdrop-filter:blur(20px);
+border:1px solid var(--border-light);
+border-radius:18px;
+box-shadow:0 18px 44px var(--shadow-soft);
+padding:20px;
+}
+
+.compare-controls{
+display:grid;
+grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+gap:12px;
+align-items:end;
+}
+
+.compare-field{
+display:flex;
+flex-direction:column;
+gap:7px;
+min-width:0;
+}
+
+.compare-field label{
+color:var(--text-secondary);
+font-size:13px;
+font-weight:600;
+}
+
+.select-wrap{
+position:relative;
+}
+
+.select-wrap::after{
+border:solid var(--text-secondary);
+border-width:0 2px 2px 0;
+content:"";
+height:7px;
+pointer-events:none;
+position:absolute;
+right:15px;
+top:15px;
+transform:rotate(45deg);
+width:7px;
+}
+
+.compare-field select,
+.catalog-filter select{
+appearance:none;
+background:var(--surface-card);
+border:1px solid var(--border-control);
+border-radius:12px;
+box-shadow:0 10px 24px var(--shadow-soft);
+color:var(--text-primary);
+font-size:15px;
+height:44px;
+outline:none;
+padding:0 38px 0 13px;
+width:100%;
+}
+
+.compare-versus{
+align-items:center;
+background:var(--active-bg);
+border-radius:999px;
+box-shadow:0 12px 24px var(--shadow-medium);
+color:var(--active-text);
+display:flex;
+font-size:12px;
+font-weight:700;
+height:38px;
+justify-content:center;
+letter-spacing:0.08em;
+margin-bottom:3px;
+width:38px;
+}
+
+.compare-output{
+display:grid;
+grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+gap:16px;
+margin-top:18px;
+}
+
+.model-card{
+background:var(--surface-card);
+border:1px solid var(--border-light);
+border-radius:16px;
+box-shadow:0 12px 28px var(--shadow-soft);
+padding:18px;
+min-width:0;
+}
+
+.model-top{
+align-items:center;
+display:flex;
+gap:13px;
+margin-bottom:14px;
+}
+
+.model-logo{
+align-items:center;
+background:linear-gradient(135deg,#0071e3,#34c759);
+border-radius:14px;
+box-shadow:0 12px 24px rgba(0,113,227,0.18);
+color:white;
+display:flex;
+font-size:15px;
+font-weight:800;
+height:46px;
+justify-content:center;
+line-height:1;
+width:46px;
+}
+
+.model-card h2,
+.model-card h3,
+.catalog-title{
+color:var(--text-heading);
+font-family:var(--font-serif);
+font-weight:500;
+letter-spacing:0;
+margin:0;
+}
+
+.model-card h2{
+font-size:22px;
+}
+
+.model-meta{
+color:var(--text-secondary);
+font-size:13px;
+font-weight:600;
+margin-top:3px;
+}
+
+.model-note{
+color:var(--text-muted);
+font-size:14px;
+line-height:1.55;
+margin:0 0 14px;
+min-height:44px;
+}
+
+.tags{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:16px;
+}
+
+.tag{
+background:var(--surface-soft);
+border:1px solid var(--border-control);
+border-radius:999px;
+color:var(--text-secondary);
+font-size:12px;
+font-weight:600;
+padding:6px 9px;
+}
+
+.metrics{
+display:flex;
+flex-direction:column;
+gap:11px;
+}
+
+.metric{
+display:grid;
+grid-template-columns:30px minmax(82px,0.55fr) minmax(90px,1fr) 30px;
+gap:10px;
+align-items:center;
+}
+
+.metric-icon{
+align-items:center;
+background:var(--surface-soft);
+border:1px solid var(--border-control);
+border-radius:9px;
+display:flex;
+height:30px;
+justify-content:center;
+position:relative;
+width:30px;
+}
+
+.metric-icon::before,
+.metric-icon::after{
+content:"";
+position:absolute;
+}
+
+.metric-icon.reason::before{
+border:2px solid var(--accent);
+border-radius:50%;
+height:13px;
+width:13px;
+}
+
+.metric-icon.reason::after{
+background:var(--accent);
+border-radius:50%;
+height:4px;
+width:4px;
+}
+
+.metric-icon.write::before{
+background:var(--accent);
+height:14px;
+transform:rotate(42deg);
+width:4px;
+}
+
+.metric-icon.write::after{
+border-bottom:5px solid var(--accent);
+border-left:4px solid transparent;
+border-right:4px solid transparent;
+bottom:6px;
+height:0;
+right:7px;
+transform:rotate(42deg);
+width:0;
+}
+
+.metric-icon.code::before{
+border:solid var(--accent);
+border-width:0 0 2px 2px;
+height:8px;
+left:7px;
+transform:rotate(45deg);
+width:8px;
+}
+
+.metric-icon.code::after{
+border:solid var(--accent);
+border-width:2px 2px 0 0;
+height:8px;
+right:7px;
+transform:rotate(45deg);
+width:8px;
+}
+
+.metric-icon.speed::before{
+border:2px solid var(--accent);
+border-left-color:transparent;
+border-radius:50%;
+height:15px;
+width:15px;
+}
+
+.metric-icon.speed::after{
+background:var(--accent);
+height:2px;
+left:15px;
+top:15px;
+transform:rotate(-35deg);
+transform-origin:left center;
+width:8px;
+}
+
+.metric-icon.multi::before{
+background:var(--accent);
+border-radius:4px;
+box-shadow:9px 0 0 rgba(0,113,227,0.46),4px 9px 0 rgba(52,199,89,0.78);
+height:8px;
+left:7px;
+top:7px;
+width:8px;
+}
+
+.metric-icon.open::before{
+border:2px solid var(--accent);
+border-radius:4px;
+height:13px;
+width:13px;
+}
+
+.metric-icon.open::after{
+background:var(--surface-soft);
+border-left:2px solid var(--accent);
+border-top:2px solid var(--accent);
+height:7px;
+right:7px;
+top:6px;
+transform:rotate(45deg);
+width:7px;
+}
+
+.metric-label{
+color:var(--text-secondary);
+font-size:13px;
+font-weight:600;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.metric-track{
+background:var(--surface-soft);
+border-radius:999px;
+height:9px;
+overflow:hidden;
+}
+
+.metric-fill{
+background:linear-gradient(90deg,#0071e3,#34c759);
+border-radius:999px;
+display:block;
+height:100%;
+width:calc(var(--value) * 20%);
+}
+
+.metric-score{
+color:var(--text-muted);
+font-size:12px;
+font-weight:700;
+text-align:right;
+}
+
+.catalog{
+margin-top:24px;
+}
+
+.catalog-head{
+align-items:end;
+display:flex;
+gap:16px;
+justify-content:space-between;
+margin-bottom:14px;
+}
+
+.catalog-title{
+font-size:28px;
+}
+
+.catalog-subtitle{
+color:var(--text-secondary);
+font-size:14px;
+line-height:1.5;
+margin:5px 0 0;
+}
+
+.catalog-filter{
+min-width:220px;
+}
+
+.catalog-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:16px;
+}
+
+.version-card{
+background:var(--surface-card);
+border:1px solid var(--border-light);
+border-top:3px solid var(--accent);
+border-radius:16px;
+box-shadow:0 12px 28px var(--shadow-soft);
+padding:18px;
+min-width:0;
+}
+
+.version-card h3{
+font-size:20px;
+}
+
+.version-list{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:14px;
+}
+
+.version-row{
+align-items:center;
+background:var(--surface-soft);
+border:1px solid var(--border-control);
+border-radius:12px;
+display:grid;
+grid-template-columns:minmax(0,1fr) auto;
+gap:10px;
+padding:10px 11px;
+}
+
+.version-row strong{
+color:var(--text-heading);
+font-size:14px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.version-row span{
+color:var(--text-muted);
+font-size:12px;
+line-height:1.4;
+}
+
+.score-badge{
+background:var(--active-bg);
+border-radius:999px;
+color:var(--active-text);
+font-size:12px;
+font-weight:700;
+padding:6px 8px;
+white-space:nowrap;
+}
+
+footer{
+text-align:center;
+padding:34px 20px 42px;
+color:var(--text-secondary);
+}
+
+.footer-links{
+text-align:center;
+margin-top:20px;
+}
+
+.footer-links a{
+color:var(--accent);
+text-decoration:none;
+}
+
+.footer-links a:hover{
+color:var(--accent-hover);
+}
+
+@media (max-width:760px){
+.nav{
+align-items:flex-start;
+flex-direction:column;
+gap:14px;
+padding:16px;
+}
+
+.nav-left,
+.nav-actions{
+width:100%;
+}
+
+.nav-links{
+justify-content:flex-start;
+overflow-x:auto;
+padding-bottom:2px;
+width:100%;
+}
+
+.nav-links a{
+background:var(--surface-card);
+}
+
+.hero{
+padding:48px 16px 22px;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+.page{
+padding:12px 12px 40px;
+}
+
+.compare-controls,
+.compare-output{
+grid-template-columns:1fr;
+}
+
+.compare-versus{
+justify-self:center;
+margin:0;
+}
+
+.metric{
+grid-template-columns:30px minmax(76px,0.58fr) minmax(80px,1fr) 30px;
+}
+
+.catalog-head{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.catalog-filter{
+min-width:0;
+width:100%;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="nav">
+<div class="nav-left">
+<div class="logo">AI Tools</div>
+<span class="nav-badge" id="nav_badge"></span>
+</div>
+
+<nav class="nav-links" aria-label="Primary navigation">
+<a href="/" id="nav_home"></a>
+<a href="/compare.html" class="active" id="nav_compare"></a>
+<a href="/about.html" id="nav_about"></a>
+<a href="/contact.html" id="nav_contact"></a>
+</nav>
+
+<div class="nav-actions">
+<a class="submit-link" href="mailto:3586206523@email.com" id="nav_submit"></a>
+<button class="theme-switch" id="theme_switch" onclick="switchTheme()" type="button" aria-label="Switch theme">
+<span class="theme-switch-knob"></span>
+<span class="theme-light" id="theme_light"></span>
+<span class="theme-dark" id="theme_dark"></span>
+</button>
+<button class="lang-switch" id="lang_switch" onclick="switchLang()" type="button" aria-label="Switch language">
+<span class="lang-switch-knob"></span>
+<span class="lang-en">EN</span>
+<span class="lang-zh">中文</span>
+</button>
+</div>
+</div>
+
+<section class="hero">
+<h1 id="title"></h1>
+<p id="subtitle"></p>
+</section>
+
+<main class="page">
+<section class="compare-panel">
+<div class="compare-controls" aria-label="AI model comparison controls">
+<div class="compare-field">
+<label for="compare_left" id="left_label"></label>
+<div class="select-wrap">
+<select id="compare_left" onchange="renderComparison()"></select>
+</div>
+</div>
+<div class="compare-versus" id="versus"></div>
+<div class="compare-field">
+<label for="compare_right" id="right_label"></label>
+<div class="select-wrap">
+<select id="compare_right" onchange="renderComparison()"></select>
+</div>
+</div>
+</div>
+<div class="compare-output" id="compare_output"></div>
+</section>
+
+<section class="catalog">
+<div class="catalog-head">
+<div>
+<h2 class="catalog-title" id="catalog_title"></h2>
+<p class="catalog-subtitle" id="catalog_subtitle"></p>
+</div>
+<div class="catalog-filter">
+<div class="select-wrap">
+<select id="company_filter" onchange="renderCatalog()"></select>
+</div>
+</div>
+</div>
+<div class="catalog-grid" id="catalog_grid"></div>
+</section>
+</main>
+
+<div class="footer-links">
+<a href="/about.html">About</a> |
+<a href="/privacy.html">Privacy</a> |
+<a href="/contact.html">Contact</a>
+</div>
+<footer id="footer"></footer>
+
+<script>
+function getPreferredTheme(){
+return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+}
+
+function applyTheme(theme){
+currentTheme=theme
+document.documentElement.dataset.theme=theme
+try{
+localStorage.setItem("theme",theme)
+}catch(error){
+}
+updateThemeSwitch()
+}
+
+function switchTheme(){
+applyTheme(currentTheme==="dark" ? "light" : "dark")
+}
+
+function updateThemeSwitch(){
+let switchButton=document.getElementById("theme_switch")
+switchButton.className="theme-switch " + currentTheme
+switchButton.setAttribute("aria-pressed",currentTheme==="dark" ? "true" : "false")
+switchButton.setAttribute("aria-label",currentTheme==="dark" ? text[currentLang].theme.lightAria : text[currentLang].theme.darkAria)
+}
+
+function switchLang(){
+currentLang=currentLang==="en" ? "zh" : "en"
+document.documentElement.lang=currentLang
+updateText()
+}
+
+let currentLang=location.pathname.startsWith("/zh") ? "zh" : "en"
+let currentTheme=document.documentElement.dataset.theme || getPreferredTheme()
+
+const text={
+en:{
+title:"AI Model Version Comparison",
+subtitle:"Choose any two companies, model families, or exact versions, then compare strengths with visual indicators.",
+badge:"Model lab",
+home:"Browse",
+compare:"Compare",
+about:"About",
+contact:"Contact",
+submit:"Submit tool",
+left:"Compare side A",
+right:"Compare side B",
+versus:"VS",
+catalogTitle:"Version catalog",
+catalogSubtitle:"Browse representative versions under each company. Scores are editorial summaries for quick visual comparison.",
+allCompanies:"All companies",
+bestFor:"Best for",
+footer:"© 2026 AI Tools Directory",
+theme:{
+light:"Light",
+dark:"Dark",
+lightAria:"Switch to light mode",
+darkAria:"Switch to dark mode"
+},
+metrics:{
+reason:"Reasoning",
+write:"Writing",
+code:"Coding",
+speed:"Speed",
+multi:"Multimodal",
+open:"Open"
+}
+},
+zh:{
+title:"AI 模型版本对比",
+subtitle:"选择任意两个公司、模型家族或具体版本，用图标和能力条快速看出差异。",
+badge:"模型对比",
+home:"浏览",
+compare:"对比",
+about:"关于",
+contact:"联系",
+submit:"提交工具",
+left:"对比方 A",
+right:"对比方 B",
+versus:"VS",
+catalogTitle:"版本目录",
+catalogSubtitle:"按公司展示代表性版本。分数是便于快速浏览的编辑型概览，用来帮助用户初筛。",
+allCompanies:"全部公司",
+bestFor:"适合",
+footer:"© 2026 AI工具导航",
+theme:{
+light:"浅色",
+dark:"深色",
+lightAria:"切换到浅色模式",
+darkAria:"切换到深色模式"
+},
+metrics:{
+reason:"推理",
+write:"写作",
+code:"编程",
+speed:"速度",
+multi:"多模态",
+open:"开放"
+}
+}
+}
+
+const models=[
+{id:"gpt-5-5",company:"OpenAI",family:"GPT",version:"GPT-5.5",initials:"5.5",summary:{en:"Flagship GPT option for complex reasoning, coding, multimodal work, and general productivity.",zh:"旗舰 GPT 选项，适合复杂推理、编程、多模态任务和通用生产力。"},bestFor:{en:["Reasoning","Coding","Daily work"],zh:["推理","编程","日常效率"]},metrics:{reason:5,write:5,code:5,speed:4,multi:5,open:2}},
+{id:"gpt-5-4",company:"OpenAI",family:"GPT",version:"GPT-5.4",initials:"5.4",summary:{en:"Balanced GPT version for everyday assistant workflows with strong writing and coding coverage.",zh:"均衡型 GPT 版本，覆盖日常助手、写作和编程工作流。"},bestFor:{en:["Assistant","Writing","Coding"],zh:["助手","写作","编程"]},metrics:{reason:5,write:5,code:5,speed:4,multi:5,open:2}},
+{id:"gpt-5-3-codex",company:"OpenAI",family:"GPT",version:"GPT-5.3 Codex",initials:"CX",summary:{en:"Coding-focused GPT version for repository work, debugging, refactors, and implementation tasks.",zh:"偏编程的 GPT 版本，适合代码库工作、调试、重构和实现任务。"},bestFor:{en:["Codebases","Debugging","Agents"],zh:["代码库","调试","智能体"]},metrics:{reason:5,write:4,code:5,speed:4,multi:4,open:2}},
+{id:"gpt-4-1",company:"OpenAI",family:"GPT",version:"GPT-4.1",initials:"4.1",summary:{en:"General GPT version with broad compatibility for chat, writing, code, and structured tasks.",zh:"通用 GPT 版本，适合聊天、写作、代码和结构化任务。"},bestFor:{en:["General use","Compatibility","Writing"],zh:["通用","兼容","写作"]},metrics:{reason:4,write:5,code:4,speed:4,multi:4,open:2}},
+{id:"opus-4-7",company:"Anthropic",family:"Claude Opus",version:"Opus-4.7",initials:"O4",summary:{en:"High-end Claude version for careful analysis, long-form writing, planning, and document-heavy workflows.",zh:"高端 Claude 版本，适合严谨分析、长文写作、规划和文档密集型任务。"},bestFor:{en:["Analysis","Writing","Documents"],zh:["分析","写作","文档"]},metrics:{reason:5,write:5,code:4,speed:4,multi:4,open:1}},
+{id:"opus-4-6",company:"Anthropic",family:"Claude Opus",version:"Opus-4.6",initials:"O4",summary:{en:"Opus version focused on depth, polished language, and reliable step-by-step reasoning.",zh:"偏深度、文字质感和稳定分步推理的 Opus 版本。"},bestFor:{en:["Long context","Reasoning","Editing"],zh:["长上下文","推理","润色"]},metrics:{reason:5,write:5,code:4,speed:3,multi:4,open:1}},
+{id:"sonnet-4-5",company:"Anthropic",family:"Claude Sonnet",version:"Sonnet-4.5",initials:"S4",summary:{en:"Practical Claude version for speed, writing quality, coding help, and everyday business work.",zh:"实用型 Claude 版本，兼顾速度、写作质量、编程辅助和商务场景。"},bestFor:{en:["Business","Writing","Coding"],zh:["商务","写作","编程"]},metrics:{reason:4,write:5,code:4,speed:5,multi:4,open:1}},
+{id:"haiku-3-5",company:"Anthropic",family:"Claude Haiku",version:"Haiku-3.5",initials:"H3",summary:{en:"Fast Claude version suited to lightweight chat, classification, and simple content operations.",zh:"快速 Claude 版本，适合轻量聊天、分类和简单内容处理。"},bestFor:{en:["Speed","Classification","Short tasks"],zh:["速度","分类","短任务"]},metrics:{reason:3,write:4,code:3,speed:5,multi:3,open:1}},
+{id:"gemini-3-pro",company:"Google",family:"Gemini",version:"Gemini 3 Pro",initials:"G3",summary:{en:"Google model version for multimodal work, search-style assistance, and ecosystem-connected tasks.",zh:"Google 模型版本，适合多模态、搜索式辅助和生态联动任务。"},bestFor:{en:["Multimodal","Search","Google apps"],zh:["多模态","搜索","Google 应用"]},metrics:{reason:5,write:4,code:4,speed:5,multi:5,open:2}},
+{id:"gemini-2-5-pro",company:"Google",family:"Gemini",version:"Gemini 2.5 Pro",initials:"G2",summary:{en:"Balanced Gemini version for reasoning, image input, workspace use, and broad assistant tasks.",zh:"均衡 Gemini 版本，适合推理、图像输入、办公和通用助手任务。"},bestFor:{en:["Workspace","Vision","Reasoning"],zh:["办公","视觉","推理"]},metrics:{reason:4,write:4,code:4,speed:5,multi:5,open:2}},
+{id:"deepseek-r1",company:"DeepSeek",family:"DeepSeek",version:"DeepSeek-R1",initials:"R1",summary:{en:"Reasoning-oriented version for math, logic, code explanation, and structured problem solving.",zh:"偏推理的版本，适合数学、逻辑、代码解释和结构化解题。"},bestFor:{en:["Reasoning","Math","Code"],zh:["推理","数学","代码"]},metrics:{reason:5,write:4,code:5,speed:4,multi:2,open:4}},
+{id:"deepseek-v3",company:"DeepSeek",family:"DeepSeek",version:"DeepSeek-V3",initials:"V3",summary:{en:"General DeepSeek version with strong value for chat, writing, code, and fast technical workflows.",zh:"通用 DeepSeek 版本，适合聊天、写作、代码和快速技术工作流。"},bestFor:{en:["General use","Coding","Value"],zh:["通用","编程","性价比"]},metrics:{reason:4,write:4,code:5,speed:5,multi:2,open:4}},
+{id:"llama-4-maverick",company:"Meta",family:"Llama",version:"Llama 4 Maverick",initials:"L4",summary:{en:"Open model version for customization, local or hosted deployment, and product integration.",zh:"开放模型版本，适合定制、本地或托管部署以及产品集成。"},bestFor:{en:["Open source","Deployment","Customization"],zh:["开源","部署","定制"]},metrics:{reason:4,write:4,code:4,speed:4,multi:4,open:5}},
+{id:"llama-3-3-70b",company:"Meta",family:"Llama",version:"Llama 3.3 70B",initials:"70",summary:{en:"Widely deployable open model version for teams that need control over hosting and tuning.",zh:"易部署的开放模型版本，适合需要掌控托管和调优的团队。"},bestFor:{en:["Self-hosting","Tuning","Control"],zh:["自托管","调优","控制"]},metrics:{reason:4,write:4,code:4,speed:4,multi:2,open:5}},
+{id:"qwen-3-max",company:"Alibaba",family:"Qwen",version:"Qwen3 Max",initials:"Q3",summary:{en:"Large Qwen version with strong multilingual and Chinese capability for business and content tasks.",zh:"大型 Qwen 版本，多语言和中文能力强，适合商务和内容任务。"},bestFor:{en:["Chinese","Business","Writing"],zh:["中文","商务","写作"]},metrics:{reason:5,write:5,code:4,speed:4,multi:4,open:4}},
+{id:"qwen-3-coder",company:"Alibaba",family:"Qwen",version:"Qwen3 Coder",initials:"QC",summary:{en:"Coding-focused Qwen version for code generation, repair, and developer assistant workflows.",zh:"偏编程的 Qwen 版本，适合代码生成、修复和开发助手流程。"},bestFor:{en:["Coding","Repair","Agents"],zh:["编程","修复","智能体"]},metrics:{reason:4,write:3,code:5,speed:4,multi:3,open:4}},
+{id:"mistral-large",company:"Mistral AI",family:"Mistral",version:"Mistral Large",initials:"ML",summary:{en:"High-capability Mistral version for fast enterprise apps, European deployment needs, and developer workflows.",zh:"高能力 Mistral 版本，适合快速企业应用、欧洲部署需求和开发流程。"},bestFor:{en:["Enterprise","Speed","Developers"],zh:["企业","速度","开发者"]},metrics:{reason:4,write:4,code:4,speed:5,multi:3,open:3}},
+{id:"grok-4",company:"xAI",family:"Grok",version:"Grok 4",initials:"G4",summary:{en:"Conversation-first version connected to real-time social context, trends, and rapid exploration.",zh:"偏对话的版本，连接实时社交语境，适合趋势观察和快速探索。"},bestFor:{en:["Trends","Realtime","Conversation"],zh:["趋势","实时","对话"]},metrics:{reason:4,write:4,code:3,speed:4,multi:3,open:2}}
+]
+
+const metricIconClass={reason:"reason",write:"write",code:"code",speed:"speed",multi:"multi",open:"open"}
+
+function escapeHtml(value){
+return String(value).replace(/[&<>"']/g,character=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+"\"":"&quot;",
+"'":"&#39;"
+}[character]))
+}
+
+function groupedModels(){
+return [...new Set(models.map(model=>model.company))].map(company=>({
+company,
+items:models.filter(model=>model.company===company)
+}))
+}
+
+function updateText(){
+let t=text[currentLang]
+document.getElementById("title").innerText=t.title
+document.getElementById("subtitle").innerText=t.subtitle
+document.getElementById("nav_badge").innerText=t.badge
+document.getElementById("nav_home").innerText=t.home
+document.getElementById("nav_compare").innerText=t.compare
+document.getElementById("nav_about").innerText=t.about
+document.getElementById("nav_contact").innerText=t.contact
+document.getElementById("nav_submit").innerText=t.submit
+document.getElementById("theme_light").innerText=t.theme.light
+document.getElementById("theme_dark").innerText=t.theme.dark
+document.getElementById("left_label").innerText=t.left
+document.getElementById("right_label").innerText=t.right
+document.getElementById("versus").innerText=t.versus
+document.getElementById("catalog_title").innerText=t.catalogTitle
+document.getElementById("catalog_subtitle").innerText=t.catalogSubtitle
+document.getElementById("footer").innerText=t.footer
+document.getElementById("lang_switch").className="lang-switch " + currentLang
+updateThemeSwitch()
+renderSelectors()
+renderCompanyFilter()
+renderComparison()
+renderCatalog()
+}
+
+function renderSelectors(){
+let leftSelect=document.getElementById("compare_left")
+let rightSelect=document.getElementById("compare_right")
+let leftValue=leftSelect.value || "gpt-5-5"
+let rightValue=rightSelect.value || "opus-4-7"
+let options=groupedModels().map(group=>{
+let items=group.items.map(model=>{
+let label=`${model.version} · ${model.family}`
+return `<option value="${escapeHtml(model.id)}">${escapeHtml(label)}</option>`
+}).join("")
+return `<optgroup label="${escapeHtml(group.company)}">${items}</optgroup>`
+}).join("")
+leftSelect.innerHTML=options
+rightSelect.innerHTML=options
+leftSelect.value=models.some(model=>model.id===leftValue) ? leftValue : "gpt-5-5"
+rightSelect.value=models.some(model=>model.id===rightValue) ? rightValue : "opus-4-7"
+}
+
+function renderCompanyFilter(){
+let select=document.getElementById("company_filter")
+let currentValue=select.value || "All"
+let companies=[...new Set(models.map(model=>model.company))]
+select.innerHTML=`<option value="All">${escapeHtml(text[currentLang].allCompanies)}</option>` + companies.map(company=>`<option value="${escapeHtml(company)}">${escapeHtml(company)}</option>`).join("")
+select.value=companies.includes(currentValue) ? currentValue : "All"
+}
+
+function getModel(id){
+return models.find(model=>model.id===id) || models[0]
+}
+
+function renderComparison(){
+let leftSelect=document.getElementById("compare_left")
+let rightSelect=document.getElementById("compare_right")
+if(!leftSelect.options.length || !rightSelect.options.length){
+renderSelectors()
+}
+let leftModel=getModel(leftSelect.value)
+let rightModel=getModel(rightSelect.value)
+document.getElementById("compare_output").innerHTML=renderModelCard(leftModel) + renderModelCard(rightModel)
+}
+
+function renderModelCard(model){
+let t=text[currentLang]
+let summary=model.summary[currentLang] || model.summary.en
+let tags=(model.bestFor[currentLang] || model.bestFor.en).map(tag=>`<span class="tag">${escapeHtml(tag)}</span>`).join("")
+let metrics=Object.keys(t.metrics).map(metricKey=>{
+let value=model.metrics[metricKey] || 0
+let iconClass=metricIconClass[metricKey] || "reason"
+return `
+<div class="metric">
+<span class="metric-icon ${iconClass}" aria-hidden="true"></span>
+<span class="metric-label">${escapeHtml(t.metrics[metricKey])}</span>
+<span class="metric-track"><span class="metric-fill" style="--value:${value}"></span></span>
+<span class="metric-score">${value}/5</span>
+</div>
+`
+}).join("")
+
+return `
+<article class="model-card">
+<div class="model-top">
+<div class="model-logo">${escapeHtml(model.initials)}</div>
+<div>
+<h2>${escapeHtml(model.version)}</h2>
+<div class="model-meta">${escapeHtml(model.company)} · ${escapeHtml(model.family)}</div>
+</div>
+</div>
+<p class="model-note">${escapeHtml(summary)}</p>
+<div class="tags" aria-label="${escapeHtml(t.bestFor)}">${tags}</div>
+<div class="metrics">${metrics}</div>
+</article>
+`
+}
+
+function renderCatalog(){
+let selectedCompany=document.getElementById("company_filter").value || "All"
+let companies=groupedModels().filter(group=>selectedCompany==="All" || group.company===selectedCompany)
+let cards=companies.map(group=>{
+let rows=group.items.map(model=>{
+let total=Object.values(model.metrics).reduce((sum,value)=>sum+value,0)
+let average=(total/Object.keys(model.metrics).length).toFixed(1)
+let summary=model.summary[currentLang] || model.summary.en
+return `
+<div class="version-row">
+<div>
+<strong>${escapeHtml(model.version)}</strong>
+<span>${escapeHtml(summary)}</span>
+</div>
+<span class="score-badge">${average}/5</span>
+</div>
+`
+}).join("")
+return `
+<article class="version-card">
+<h3>${escapeHtml(group.company)}</h3>
+<div class="version-list">${rows}</div>
+</article>
+`
+}).join("")
+document.getElementById("catalog_grid").innerHTML=cards
+}
+
+updateText()
+</script>
+
+</body>
+
+</html>

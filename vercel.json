@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/zh", "destination": "/index.html" },
+    { "source": "/zh/compare", "destination": "/compare.html" },
     { "source": "/zh/tool/:slug", "destination": "/tool.html" }
   ]
 }
