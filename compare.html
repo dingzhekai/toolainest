@@ -1004,6 +1004,7 @@ grid-template-columns:minmax(72px,0.58fr) minmax(82px,1fr) 58px;
 <nav class="nav-links" aria-label="Primary navigation">
 <a href="/" id="nav_home"></a>
 <a href="/compare.html" class="active" id="nav_compare"></a>
+<a href="/prices.html" id="nav_prices"></a>
 <a href="/about.html" id="nav_about"></a>
 <a href="/contact.html" id="nav_contact"></a>
 </nav>
@@ -1048,33 +1049,6 @@ grid-template-columns:minmax(72px,0.58fr) minmax(82px,1fr) 58px;
 <div class="compare-output" id="compare_output"></div>
 </section>
 
-<section class="price-section" id="token-prices">
-<div class="price-panel">
-<div class="catalog-head">
-<div>
-<h2 class="catalog-title" id="price_title"></h2>
-<p class="catalog-subtitle" id="price_subtitle"></p>
-</div>
-</div>
-<div class="price-controls">
-<div class="compare-field">
-<label for="price_provider" id="price_provider_label"></label>
-<div class="select-wrap">
-<select id="price_provider" onchange="renderPriceSection()"></select>
-</div>
-</div>
-<div class="compare-field">
-<label for="price_workload" id="price_workload_label"></label>
-<div class="select-wrap">
-<select id="price_workload" onchange="renderPriceSection()"></select>
-</div>
-</div>
-</div>
-<div class="price-grid" id="price_grid"></div>
-<p class="source-note" id="price_source"></p>
-</div>
-</section>
-
 <section class="catalog">
 <div class="catalog-head">
 <div>
@@ -1093,6 +1067,7 @@ grid-template-columns:minmax(72px,0.58fr) minmax(82px,1fr) 58px;
 
 <div class="footer-links">
 <a href="/about.html">About</a> |
+<a href="/prices.html">Prices</a> |
 <a href="/privacy.html">Privacy</a> |
 <a href="/contact.html">Contact</a>
 </div>
@@ -1140,6 +1115,7 @@ subtitle:"Choose any two companies, model families, or exact versions, then comp
 badge:"Model lab",
 home:"Browse",
 compare:"Compare",
+prices:"Prices",
 about:"About",
 contact:"Contact",
 submit:"Submit tool",
@@ -1197,6 +1173,7 @@ subtitle:"选择任意两个公司、模型家族或具体版本，按更接近�
 badge:"模型对比",
 home:"浏览",
 compare:"对比",
+prices:"价格",
 about:"关于",
 contact:"联系",
 submit:"提交工具",
@@ -1311,6 +1288,7 @@ document.getElementById("subtitle").innerText=t.subtitle
 document.getElementById("nav_badge").innerText=t.badge
 document.getElementById("nav_home").innerText=t.home
 document.getElementById("nav_compare").innerText=t.compare
+document.getElementById("nav_prices").innerText=t.prices
 document.getElementById("nav_about").innerText=t.about
 document.getElementById("nav_contact").innerText=t.contact
 document.getElementById("nav_submit").innerText=t.submit
@@ -1319,11 +1297,6 @@ document.getElementById("theme_dark").innerText=t.theme.dark
 document.getElementById("left_label").innerText=t.left
 document.getElementById("right_label").innerText=t.right
 document.getElementById("versus").innerText=t.versus
-document.getElementById("price_title").innerText=t.priceTitle
-document.getElementById("price_subtitle").innerText=t.priceSubtitle
-document.getElementById("price_provider_label").innerText=t.priceProvider
-document.getElementById("price_workload_label").innerText=t.priceWorkload
-document.getElementById("price_source").innerText=t.priceSource
 document.getElementById("catalog_title").innerText=t.catalogTitle
 document.getElementById("catalog_subtitle").innerText=t.catalogSubtitle
 document.getElementById("footer").innerText=t.footer
@@ -1331,10 +1304,8 @@ document.getElementById("lang_switch").className="lang-switch " + currentLang
 updateThemeSwitch()
 renderSelectors()
 renderCompanyFilter()
-renderPriceControls()
 renderComparison()
 renderCatalog()
-renderPriceSection()
 }
 
 function renderSelectors(){
@@ -1542,7 +1513,6 @@ document.getElementById("price_grid").innerHTML=`<div class="price-empty">${esca
 }
 
 updateText()
-loadPriceModels()
 </script>
 
 </body>

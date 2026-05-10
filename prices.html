@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Token Prices | AI Tools Directory</title>
+
+<meta name="description" content="Compare AI model token prices for GPT, Claude, Gemini, DeepSeek, Qwen, Grok, Kimi, MiniMax, Doubao, and GLM models.">
+<meta name="keywords" content="AI token prices, GPT pricing, Claude pricing, Gemini pricing, model price comparison">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="canonical" href="https://toolainest.top/prices.html">
+
+<script>
+let savedTheme=null
+try{
+savedTheme=localStorage.getItem("theme")
+}catch(error){
+savedTheme=null
+}
+if(savedTheme!=="dark" && savedTheme!=="light"){
+savedTheme=null
+}
+let prefersDark=window.matchMedia("(prefers-color-scheme: dark)").matches
+document.documentElement.dataset.theme=savedTheme || (prefersDark ? "dark" : "light")
+</script>
+
+<style>
+:root{
+--font-sans:"Inter","Avenir Next","Helvetica Neue",Arial,sans-serif;
+--font-serif:Georgia,Cambria,"Times New Roman",serif;
+--scene-image:url("a.png");
+--page-base:#f4f5f9;
+--page-overlay:
+linear-gradient(180deg,rgba(251,251,253,0.64) 0%,rgba(244,245,249,0.78) 44%,rgba(238,241,246,0.9) 100%),
+linear-gradient(135deg,rgba(10,132,255,0.1),rgba(48,209,88,0.08) 34%,rgba(255,159,10,0.1) 72%);
+--text-primary:#1d1d1f;
+--text-strong:#111827;
+--text-heading:#161a22;
+--text-secondary:#5f6673;
+--text-muted:#69707d;
+--surface-nav:rgba(255,255,255,0.74);
+--surface-card:rgba(255,255,255,0.86);
+--surface-card-hover:white;
+--surface-soft:rgba(242,244,248,0.86);
+--surface-pill:rgba(232,235,241,0.78);
+--surface-pill-knob:rgba(255,255,255,0.96);
+--border-light:rgba(255,255,255,0.78);
+--border-control:rgba(210,214,222,0.78);
+--shadow-soft:rgba(24,39,75,0.08);
+--shadow-medium:rgba(24,39,75,0.13);
+--accent:#0071e3;
+--accent-hover:#004f9f;
+--active-bg:#111827;
+--active-text:white;
+color-scheme:light;
+}
+
+:root[data-theme="dark"]{
+--scene-image:url("b.png");
+--page-base:#0d1117;
+--page-overlay:
+linear-gradient(180deg,rgba(10,13,19,0.5) 0%,rgba(13,17,23,0.72) 46%,rgba(8,10,14,0.9) 100%),
+radial-gradient(circle at 18% 12%,rgba(0,113,227,0.2),rgba(0,0,0,0) 30%),
+radial-gradient(circle at 84% 18%,rgba(52,199,89,0.14),rgba(0,0,0,0) 28%);
+--text-primary:#f3f4f6;
+--text-strong:#f9fafb;
+--text-heading:#f7f1e8;
+--text-secondary:#b9c0cc;
+--text-muted:#a2aab8;
+--surface-nav:rgba(19,22,29,0.78);
+--surface-card:rgba(28,32,41,0.82);
+--surface-card-hover:rgba(35,40,51,0.94);
+--surface-soft:rgba(39,45,58,0.82);
+--surface-pill:rgba(39,45,58,0.78);
+--surface-pill-knob:rgba(246,241,232,0.96);
+--border-light:rgba(255,255,255,0.1);
+--border-control:rgba(255,255,255,0.14);
+--shadow-soft:rgba(0,0,0,0.26);
+--shadow-medium:rgba(0,0,0,0.36);
+--accent:#7ab7ff;
+--accent-hover:#b6d8ff;
+--active-bg:#f6f1e8;
+--active-text:#15171c;
+color-scheme:dark;
+}
+
+body{
+font-family:var(--font-sans);
+margin:0;
+background:var(--page-base);
+color:var(--text-primary);
+min-height:100vh;
+overflow-x:hidden;
+position:relative;
+}
+
+body::before,
+body::after{
+content:"";
+inset:0;
+pointer-events:none;
+position:fixed;
+}
+
+body::before{
+background-image:var(--scene-image);
+background-position:center;
+background-size:cover;
+z-index:0;
+}
+
+body::after{
+background:var(--page-overlay);
+z-index:0;
+}
+
+body > *{
+position:relative;
+z-index:1;
+}
+
+.nav{
+align-items:center;
+display:flex;
+gap:24px;
+justify-content:space-between;
+padding:20px 40px;
+background:var(--surface-nav);
+backdrop-filter:blur(22px);
+border-bottom:1px solid var(--border-light);
+box-shadow:0 10px 30px var(--shadow-soft);
+position:sticky;
+top:0;
+z-index:10;
+}
+
+.nav-left,
+.nav-actions,
+.nav-links{
+align-items:center;
+display:flex;
+gap:12px;
+}
+
+.logo{
+font-family:var(--font-serif);
+font-size:20px;
+font-weight:600;
+color:var(--text-strong);
+}
+
+.nav-badge{
+background:var(--surface-soft);
+border:1px solid var(--border-control);
+border-radius:999px;
+color:var(--text-secondary);
+font-size:12px;
+font-weight:600;
+padding:7px 10px;
+white-space:nowrap;
+}
+
+.nav-links{
+gap:6px;
+}
+
+.nav-links a{
+border-radius:999px;
+color:var(--text-secondary);
+font-size:14px;
+font-weight:600;
+padding:9px 13px;
+text-decoration:none;
+white-space:nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+background:var(--surface-card-hover);
+box-shadow:0 8px 20px var(--shadow-soft);
+color:var(--text-strong);
+}
+
+.submit-link{
+background:var(--active-bg);
+border-radius:999px;
+box-shadow:0 12px 26px var(--shadow-medium);
+color:var(--active-text);
+font-size:14px;
+font-weight:600;
+padding:11px 15px;
+text-decoration:none;
+white-space:nowrap;
+}
+
+.theme-switch,
+.lang-switch{
+align-items:center;
+appearance:none;
+background:var(--surface-pill);
+border:1px solid var(--border-control);
+border-radius:999px;
+box-sizing:border-box;
+cursor:pointer;
+display:flex;
+font-size:13px;
+height:40px;
+line-height:1;
+overflow:hidden;
+padding:4px;
+position:relative;
+}
+
+.theme-switch{
+width:118px;
+}
+
+.lang-switch{
+font-size:14px;
+width:124px;
+}
+
+.theme-switch-knob,
+.lang-switch-knob{
+background:var(--surface-pill-knob);
+border-radius:999px;
+box-shadow:0 6px 16px var(--shadow-soft);
+display:block;
+height:30px;
+left:4px;
+position:absolute;
+top:4px;
+transition:transform 0.32s cubic-bezier(0.22,1,0.36,1);
+z-index:0;
+}
+
+.theme-switch-knob{
+width:54px;
+}
+
+.lang-switch-knob{
+width:56px;
+}
+
+.theme-switch.dark .theme-switch-knob{
+transform:translateX(56px);
+}
+
+.lang-switch.zh .lang-switch-knob{
+transform:translateX(60px);
+}
+
+.theme-switch span:not(.theme-switch-knob),
+.lang-switch span:not(.lang-switch-knob){
+align-items:center;
+color:var(--text-secondary);
+display:flex;
+flex:1;
+font-weight:600;
+justify-content:center;
+position:relative;
+z-index:1;
+}
+
+.theme-switch.light .theme-light,
+.theme-switch.dark .theme-dark,
+.lang-switch.en .lang-en,
+.lang-switch.zh .lang-zh{
+color:var(--text-strong);
+}
+
+.hero{
+max-width:1100px;
+margin:0 auto;
+padding:72px 20px 30px;
+text-align:center;
+}
+
+.hero h1{
+font-family:var(--font-serif);
+font-size:52px;
+font-weight:500;
+letter-spacing:0;
+line-height:1.05;
+margin:0 0 12px;
+background:linear-gradient(90deg,#111827 0%,#0066cc 42%,#159b72 72%,#2d2d2f 100%);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+:root[data-theme="dark"] .hero h1{
+background:linear-gradient(90deg,#f7f1e8 0%,#7ab7ff 42%,#9fe3bd 72%,#f5dfc8 100%);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+.hero p{
+color:var(--text-secondary);
+font-size:18px;
+line-height:1.65;
+margin:0 auto;
+max-width:760px;
+}
+
+.page{
+max-width:1200px;
+margin:0 auto;
+padding:18px 20px 50px;
+}
+
+.price-panel{
+background:var(--surface-nav);
+backdrop-filter:blur(20px);
+border:1px solid var(--border-light);
+border-radius:18px;
+box-shadow:0 18px 44px var(--shadow-soft);
+padding:20px;
+}
+
+.panel-head{
+align-items:end;
+display:flex;
+gap:16px;
+justify-content:space-between;
+margin-bottom:16px;
+}
+
+.panel-title{
+font-family:var(--font-serif);
+font-size:28px;
+font-weight:500;
+color:var(--text-heading);
+margin:0;
+}
+
+.panel-subtitle,
+.source-note{
+color:var(--text-secondary);
+font-size:14px;
+line-height:1.5;
+margin:6px 0 0;
+}
+
+.price-controls{
+display:grid;
+grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+gap:12px;
+max-width:620px;
+}
+
+.field{
+display:flex;
+flex-direction:column;
+gap:7px;
+min-width:0;
+}
+
+.field label{
+color:var(--text-secondary);
+font-size:13px;
+font-weight:700;
+}
+
+.select-wrap{
+position:relative;
+}
+
+.select-wrap::after{
+border:solid var(--text-secondary);
+border-width:0 2px 2px 0;
+content:"";
+height:7px;
+pointer-events:none;
+position:absolute;
+right:15px;
+top:15px;
+transform:rotate(45deg);
+width:7px;
+}
+
+select{
+appearance:none;
+background:var(--surface-card);
+border:1px solid var(--border-control);
+border-radius:12px;
+box-shadow:0 10px 24px var(--shadow-soft);
+color:var(--text-primary);
+font-size:15px;
+height:44px;
+outline:none;
+padding:0 38px 0 13px;
+width:100%;
+}
+
+.price-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+gap:16px;
+margin-top:18px;
+}
+
+.price-card{
+background:var(--surface-card);
+border:1px solid var(--border-light);
+border-radius:16px;
+box-shadow:0 12px 28px var(--shadow-soft);
+padding:16px;
+min-width:0;
+}
+
+.price-card-top{
+align-items:flex-start;
+display:flex;
+gap:12px;
+justify-content:space-between;
+margin-bottom:12px;
+}
+
+.price-card h3{
+color:var(--text-heading);
+font-family:var(--font-serif);
+font-size:20px;
+font-weight:500;
+margin:0 0 4px;
+}
+
+.price-id{
+color:var(--text-muted);
+display:block;
+font-size:12px;
+line-height:1.35;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.price-cost{
+background:var(--active-bg);
+border-radius:12px;
+color:var(--active-text);
+font-size:13px;
+font-weight:800;
+padding:9px 10px;
+white-space:nowrap;
+}
+
+.price-meta{
+display:flex;
+flex-wrap:wrap;
+gap:7px;
+margin-bottom:13px;
+}
+
+.price-meta span{
+background:var(--surface-soft);
+border:1px solid var(--border-control);
+border-radius:999px;
+color:var(--text-secondary);
+font-size:12px;
+font-weight:600;
+padding:6px 8px;
+}
+
+.price-bars{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.price-row{
+display:grid;
+grid-template-columns:minmax(84px,0.58fr) minmax(90px,1fr) 70px;
+gap:10px;
+align-items:center;
+}
+
+.price-row-label{
+color:var(--text-secondary);
+font-size:12px;
+font-weight:700;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.price-track{
+background:var(--surface-soft);
+border-radius:999px;
+height:9px;
+overflow:hidden;
+}
+
+.price-fill{
+background:linear-gradient(90deg,#34c759,#ff9f0a);
+border-radius:999px;
+display:block;
+height:100%;
+width:calc(var(--value) * 1%);
+}
+
+.price-value{
+color:var(--text-muted);
+font-size:12px;
+font-weight:800;
+text-align:right;
+}
+
+.price-empty{
+background:var(--surface-card);
+border:1px solid var(--border-light);
+border-radius:16px;
+color:var(--text-secondary);
+padding:18px;
+}
+
+.footer-links,
+footer{
+text-align:center;
+color:var(--text-secondary);
+}
+
+.footer-links{
+margin-top:20px;
+}
+
+.footer-links a{
+color:var(--accent);
+text-decoration:none;
+}
+
+footer{
+padding:34px 20px 42px;
+}
+
+@media (max-width:760px){
+.nav{
+align-items:flex-start;
+flex-direction:column;
+gap:14px;
+padding:16px;
+}
+
+.nav-left,
+.nav-actions,
+.nav-links{
+width:100%;
+}
+
+.nav-links{
+overflow-x:auto;
+padding-bottom:2px;
+}
+
+.nav-links a{
+background:var(--surface-card);
+}
+
+.hero{
+padding:48px 16px 22px;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+.page{
+padding:12px 12px 40px;
+}
+
+.panel-head,
+.price-controls{
+grid-template-columns:1fr;
+align-items:flex-start;
+flex-direction:column;
+}
+
+.price-controls{
+display:grid;
+max-width:none;
+}
+
+.price-row{
+grid-template-columns:minmax(78px,0.58fr) minmax(82px,1fr) 64px;
+}
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="nav">
+<div class="nav-left">
+<div class="logo">AI Tools</div>
+<span class="nav-badge" id="nav_badge"></span>
+</div>
+
+<nav class="nav-links" aria-label="Primary navigation">
+<a href="/" id="nav_home"></a>
+<a href="/compare.html" id="nav_compare"></a>
+<a href="/prices.html" class="active" id="nav_prices"></a>
+<a href="/about.html" id="nav_about"></a>
+<a href="/contact.html" id="nav_contact"></a>
+</nav>
+
+<div class="nav-actions">
+<a class="submit-link" href="mailto:3586206523@email.com" id="nav_submit"></a>
+<button class="theme-switch" id="theme_switch" onclick="switchTheme()" type="button" aria-label="Switch theme">
+<span class="theme-switch-knob"></span>
+<span class="theme-light" id="theme_light"></span>
+<span class="theme-dark" id="theme_dark"></span>
+</button>
+<button class="lang-switch" id="lang_switch" onclick="switchLang()" type="button" aria-label="Switch language">
+<span class="lang-switch-knob"></span>
+<span class="lang-en">EN</span>
+<span class="lang-zh">中文</span>
+</button>
+</div>
+</div>
+
+<section class="hero">
+<h1 id="title"></h1>
+<p id="subtitle"></p>
+</section>
+
+<main class="page">
+<section class="price-panel">
+<div class="panel-head">
+<div>
+<h2 class="panel-title" id="panel_title"></h2>
+<p class="panel-subtitle" id="panel_subtitle"></p>
+</div>
+<div class="price-controls">
+<div class="field">
+<label for="price_provider" id="provider_label"></label>
+<div class="select-wrap">
+<select id="price_provider" onchange="renderPrices()"></select>
+</div>
+</div>
+<div class="field">
+<label for="price_workload" id="workload_label"></label>
+<div class="select-wrap">
+<select id="price_workload" onchange="renderPrices()"></select>
+</div>
+</div>
+</div>
+</div>
+<div class="price-grid" id="price_grid"></div>
+<p class="source-note" id="source_note"></p>
+</section>
+</main>
+
+<div class="footer-links">
+<a href="/about.html">About</a> |
+<a href="/compare.html">Compare</a> |
+<a href="/privacy.html">Privacy</a> |
+<a href="/contact.html">Contact</a>
+</div>
+<footer id="footer"></footer>
+
+<script>
+function getPreferredTheme(){
+return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+}
+
+function applyTheme(theme){
+currentTheme=theme
+document.documentElement.dataset.theme=theme
+try{
+localStorage.setItem("theme",theme)
+}catch(error){
+}
+updateThemeSwitch()
+}
+
+function switchTheme(){
+applyTheme(currentTheme==="dark" ? "light" : "dark")
+}
+
+function updateThemeSwitch(){
+let switchButton=document.getElementById("theme_switch")
+switchButton.className="theme-switch " + currentTheme
+switchButton.setAttribute("aria-pressed",currentTheme==="dark" ? "true" : "false")
+switchButton.setAttribute("aria-label",currentTheme==="dark" ? text[currentLang].theme.lightAria : text[currentLang].theme.darkAria)
+}
+
+function switchLang(){
+currentLang=currentLang==="en" ? "zh" : "en"
+document.documentElement.lang=currentLang
+updateText()
+renderControls()
+renderPrices()
+}
+
+let currentLang=location.pathname.startsWith("/zh") ? "zh" : "en"
+let currentTheme=document.documentElement.dataset.theme || getPreferredTheme()
+let priceModels=[]
+
+const workloads={
+chat:{input:1000000,cached:0,output:250000},
+agent:{input:3000000,cached:1000000,output:800000},
+coding:{input:2000000,cached:500000,output:1000000}
+}
+
+const text={
+en:{
+title:"AI Token Price Explorer",
+subtitle:"Compare model costs without digging through provider tables: input, output, cache reads, cache writes, context, and a sample workload cost.",
+badge:"Token prices",
+home:"Browse",
+compare:"Compare",
+prices:"Prices",
+about:"About",
+contact:"Contact",
+submit:"Submit tool",
+panelTitle:"Token pricing by model",
+panelSubtitle:"Prices are normalized to USD per 1M tokens. The model cards are calibrated from the public OfoxAI Models API.",
+provider:"Provider",
+workload:"Sample workload",
+allProviders:"All providers",
+source:"Source: OfoxAI public Models API. Prices can change; verify before production use.",
+footer:"© 2026 AI Tools Directory",
+theme:{light:"Light",dark:"Dark",lightAria:"Switch to light mode",darkAria:"Switch to dark mode"},
+labels:{input:"Input",output:"Output",cached:"Cached read",cache5m:"Cache write",cache1h:"1h cache",search:"Search",context:"Context",maxOutput:"Max output",example:"Example",loading:"Loading price data..."},
+workloads:{chat:"Chat: 1M input + 250K output",agent:"Agent: 3M input + 1M cached + 800K output",coding:"Coding: 2M input + 500K cached + 1M output"}
+},
+zh:{
+title:"AI Token 价格查询",
+subtitle:"不用翻各家表格，直接对比输入、输出、缓存读取、缓存写入、上下文和示例任务成本。",
+badge:"Token 价格",
+home:"浏览",
+compare:"对比",
+prices:"价格",
+about:"关于",
+contact:"联系",
+submit:"提交工具",
+panelTitle:"按模型查看 Token 定价",
+panelSubtitle:"价格统一换算为美元 / 100 万 tokens。模型卡片根据 OfoxAI 公开 Models API 校准。",
+provider:"供应商",
+workload:"示例工作量",
+allProviders:"全部供应商",
+source:"来源：OfoxAI 公开 Models API。价格可能变化，生产使用前请再次核对。",
+footer:"© 2026 AI工具导航",
+theme:{light:"浅色",dark:"深色",lightAria:"切换到浅色模式",darkAria:"切换到深色模式"},
+labels:{input:"输入",output:"输出",cached:"缓存读取",cache5m:"缓存写入",cache1h:"1小时缓存",search:"搜索",context:"上下文",maxOutput:"最大输出",example:"示例",loading:"正在加载价格数据..."},
+workloads:{chat:"聊天：100万输入 + 25万输出",agent:"智能体：300万输入 + 100万缓存 + 80万输出",coding:"编程：200万输入 + 50万缓存 + 100万输出"}
+}
+}
+
+function escapeHtml(value){
+return String(value).replace(/[&<>"']/g,character=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+"\"":"&quot;",
+"'":"&#39;"
+}[character]))
+}
+
+function updateText(){
+let t=text[currentLang]
+document.getElementById("title").innerText=t.title
+document.getElementById("subtitle").innerText=t.subtitle
+document.getElementById("nav_badge").innerText=t.badge
+document.getElementById("nav_home").innerText=t.home
+document.getElementById("nav_compare").innerText=t.compare
+document.getElementById("nav_prices").innerText=t.prices
+document.getElementById("nav_about").innerText=t.about
+document.getElementById("nav_contact").innerText=t.contact
+document.getElementById("nav_submit").innerText=t.submit
+document.getElementById("theme_light").innerText=t.theme.light
+document.getElementById("theme_dark").innerText=t.theme.dark
+document.getElementById("panel_title").innerText=t.panelTitle
+document.getElementById("panel_subtitle").innerText=t.panelSubtitle
+document.getElementById("provider_label").innerText=t.provider
+document.getElementById("workload_label").innerText=t.workload
+document.getElementById("source_note").innerText=t.source
+document.getElementById("footer").innerText=t.footer
+document.getElementById("lang_switch").className="lang-switch " + currentLang
+updateThemeSwitch()
+}
+
+function renderControls(){
+let providerSelect=document.getElementById("price_provider")
+let workloadSelect=document.getElementById("price_workload")
+let providerValue=providerSelect.value || "All"
+let workloadValue=workloadSelect.value || "chat"
+let providers=[...new Set(priceModels.map(model=>model.provider))]
+providerSelect.innerHTML=`<option value="All">${escapeHtml(text[currentLang].allProviders)}</option>` + providers.map(provider=>`<option value="${escapeHtml(provider)}">${escapeHtml(provider)}</option>`).join("")
+providerSelect.value=providers.includes(providerValue) ? providerValue : "All"
+workloadSelect.innerHTML=Object.keys(workloads).map(key=>`<option value="${escapeHtml(key)}">${escapeHtml(text[currentLang].workloads[key])}</option>`).join("")
+workloadSelect.value=workloads[workloadValue] ? workloadValue : "chat"
+}
+
+function formatMoney(value){
+if(value===null || value===undefined){
+return "-"
+}
+if(value===0){
+return "$0"
+}
+let decimals=value < 0.01 ? 4 : (value < 1 ? 3 : 2)
+return "$" + Number(value).toFixed(decimals).replace(/0+$/,"").replace(/\.$/,"")
+}
+
+function getWorkloadCost(model, workloadKey){
+let workload=workloads[workloadKey] || workloads.chat
+let cachedPrice=model.pricing.cachedInput ?? model.pricing.input
+return (workload.input/1000000*model.pricing.input) + (workload.cached/1000000*cachedPrice) + (workload.output/1000000*model.pricing.output)
+}
+
+function renderPrices(){
+let t=text[currentLang]
+let grid=document.getElementById("price_grid")
+if(!priceModels.length){
+grid.innerHTML=`<div class="price-empty">${escapeHtml(t.labels.loading)}</div>`
+return
+}
+let provider=document.getElementById("price_provider").value || "All"
+let workloadKey=document.getElementById("price_workload").value || "chat"
+let visibleModels=priceModels.filter(model=>provider==="All" || model.provider===provider)
+let maxPrice=Math.max(...visibleModels.flatMap(model=>[
+model.pricing.input,
+model.pricing.output,
+model.pricing.cachedInput || 0,
+model.pricing.cacheWrite5m || 0,
+model.pricing.cacheWrite1h || 0
+]),1)
+visibleModels.sort((a,b)=>getWorkloadCost(a,workloadKey)-getWorkloadCost(b,workloadKey))
+grid.innerHTML=visibleModels.map(model=>renderPriceCard(model,workloadKey,maxPrice)).join("")
+}
+
+function renderPriceCard(model, workloadKey, maxPrice){
+let labels=text[currentLang].labels
+let rows=[
+{label:labels.input,value:model.pricing.input},
+{label:labels.output,value:model.pricing.output},
+{label:labels.cached,value:model.pricing.cachedInput},
+{label:labels.cache5m,value:model.pricing.cacheWrite5m},
+{label:labels.cache1h,value:model.pricing.cacheWrite1h},
+{label:labels.search,value:model.pricing.webSearch}
+].filter(row=>row.value!==null && row.value!==undefined).map(row=>{
+let width=row.value ? Math.max((row.value/maxPrice)*100,3) : 0
+return `
+<div class="price-row">
+<span class="price-row-label">${escapeHtml(row.label)}</span>
+<span class="price-track"><span class="price-fill" style="--value:${width}"></span></span>
+<span class="price-value">${escapeHtml(formatMoney(row.value))}</span>
+</div>
+`
+}).join("")
+
+let cost=getWorkloadCost(model,workloadKey)
+return `
+<article class="price-card">
+<div class="price-card-top">
+<div>
+<h3>${escapeHtml(model.name)}</h3>
+<span class="price-id">${escapeHtml(model.id)}</span>
+</div>
+<div class="price-cost">${escapeHtml(formatMoney(cost))}</div>
+</div>
+<div class="price-meta">
+<span>${escapeHtml(model.provider)}</span>
+<span>${escapeHtml(labels.context)} ${escapeHtml(model.context)}</span>
+<span>${escapeHtml(labels.maxOutput)} ${escapeHtml(model.maxOutput)}</span>
+</div>
+<div class="price-bars">${rows}</div>
+<p class="source-note"><strong>${escapeHtml(labels.example)}:</strong> ${escapeHtml(text[currentLang].workloads[workloadKey])}</p>
+</article>
+`
+}
+
+function loadPrices(){
+fetch("/data/model-prices.json")
+.then(response=>response.json())
+.then(data=>{
+priceModels=data.models || []
+renderControls()
+renderPrices()
+})
+.catch(()=>{
+document.getElementById("price_grid").innerHTML=`<div class="price-empty">${escapeHtml(text[currentLang].labels.loading)}</div>`
+})
+}
+
+updateText()
+loadPrices()
+</script>
+
+</body>
+
+</html>
