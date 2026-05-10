@@ -878,26 +878,70 @@ text-align:right;
 
 /* LAYOUT */
 .content-layout{
-display:grid;
-grid-template-columns:220px minmax(0,1fr);
-gap:24px;
+display:block;
 max-width:1200px;
 margin:auto;
 padding:20px;
 }
 
 .sidebar{
-position:sticky;
-top:20px;
-align-self:start;
-max-height:calc(100vh - 40px);
-overflow-y:auto;
+position:fixed;
+left:0;
+top:50%;
+transform:translateY(-50%);
+z-index:100;
+width:48px;
+max-height:80vh;
+overflow:hidden;
 background:var(--surface-nav);
 backdrop-filter:blur(18px);
-border-radius:18px;
+border-radius:0 18px 18px 0;
 border:1px solid var(--border-light);
-box-shadow:0 18px 44px var(--shadow-soft);
+border-left:none;
+box-shadow:4px 0 24px var(--shadow-soft);
+padding:16px 8px;
+transition:width 0.3s cubic-bezier(.4,0,.2,1),
+           padding 0.3s cubic-bezier(.4,0,.2,1),
+           box-shadow 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+.sidebar:hover{
+width:200px;
 padding:16px;
+box-shadow:8px 0 32px var(--shadow-soft);
+}
+
+.sidebar-title{
+opacity:0;
+white-space:nowrap;
+transition:opacity 0.2s ease 0s;
+}
+
+.sidebar:hover .sidebar-title{
+opacity:1;
+transition:opacity 0.2s ease 0.1s;
+}
+
+.filters button{
+white-space:nowrap;
+overflow:hidden;
+}
+
+.sidebar-collapse-hint{
+font-size:20px;
+color:var(--text-secondary);
+text-align:center;
+margin-bottom:8px;
+opacity:1;
+transition:opacity 0.15s ease;
+cursor:default;
+}
+
+.sidebar:hover .sidebar-collapse-hint{
+opacity:0;
+height:0;
+margin:0;
+overflow:hidden;
 }
 
 .sidebar-title{
@@ -1071,15 +1115,18 @@ padding:11px 14px;
 }
 
 .content-layout{
-grid-template-columns:1fr;
 padding:12px;
 }
 
 .sidebar{
-position:relative;
-top:auto;
-max-height:180px;
-border-radius:14px;
+width:40px;
+padding:12px 6px;
+border-radius:0 14px 14px 0;
+}
+
+.sidebar:hover{
+width:180px;
+padding:12px;
 }
 
 .compare-section{
@@ -1202,6 +1249,7 @@ data-full-width-responsive="true"></ins>
 <div class="content-layout">
 
 <aside class="sidebar">
+<div class="sidebar-collapse-hint">≡</div>
 <div class="sidebar-title" id="category_title"></div>
 <div class="filters" id="category_filters"></div>
 </aside>
