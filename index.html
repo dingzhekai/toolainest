@@ -306,9 +306,11 @@ white-space:nowrap;
 .nav-links{
 align-items:center;
 display:flex;
-gap:6px;
+gap:2px;
 justify-content:center;
 min-width:0;
+flex-shrink:1;
+overflow:hidden;
 }
 
 .nav-links a{
@@ -316,7 +318,7 @@ border-radius:999px;
 color:var(--text-secondary);
 font-size:14px;
 font-weight:600;
-padding:9px 13px;
+padding:9px 10px;
 text-decoration:none;
 transition:background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
 white-space:nowrap;
